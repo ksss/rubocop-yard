@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = "Check yardoc format."
   spec.description = "Check yardoc format like tag type."
-  spec.homepage = "https://ksss.ink/"
+  spec.homepage = "https://github.com/ksss/rubocop-yard"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
 
