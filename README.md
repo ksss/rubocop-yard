@@ -2,7 +2,7 @@
 
 You can check YARD format in Ruby code comment by RuboCop.
 
-<img src="https://github.com/ksss/rubocop-yard/blob/main/demo.png?raw=true" width=500 />
+<img src="https://github.com/ksss/rubocop-yard/blob/main/demo.png?raw=true" width=700 />
 
 ## Features
 
