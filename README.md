@@ -1,8 +1,12 @@
-# Rubocop::Yard
+# Rubocop::YARD
 
-TODO: Delete this and the text below, and describe your gem
+You can check YARD format in Ruby code comment by RuboCop.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rubocop/yard`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Features
+
+### `YARD/TagTypeSyntax`
+
+Check tag type syntax error.
 
 ## Installation
 
@@ -18,7 +22,11 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ## Usage
 
-TODO: Write usage instructions here
+Put this into your `.rubocop.yml`.
+
+```yaml
+require: rubocop-yard
+```
 
 ## Development
 
@@ -36,4 +44,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Rubocop::Yard project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/ksss/rubocop-yard/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the Rubocop::YARD project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/ksss/rubocop-yard/blob/main/CODE_OF_CONDUCT.md).

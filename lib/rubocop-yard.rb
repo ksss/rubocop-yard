@@ -6,6 +6,6 @@ require_relative 'rubocop/yard'
 require_relative 'rubocop/yard/version'
 require_relative 'rubocop/yard/inject'
 
-RuboCop::Yard::Inject.defaults!
+RuboCop::YARD::Inject.defaults!
 
 require_relative 'rubocop/cop/yard_cops'

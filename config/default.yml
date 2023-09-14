@@ -1,1 +1,4 @@
-# Write it!
+YARD/TagTypeSyntax:
+  Description: 'Check syntax for yard tag type'
+  Enabled: true
+  VersionAdded: '0.1.0'

@@ -3,7 +3,7 @@
 # The original code is from https://github.com/rubocop/rubocop-rspec/blob/master/lib/rubocop/rspec/inject.rb
 # See https://github.com/rubocop/rubocop-rspec/blob/master/MIT-LICENSE.md
 module RuboCop
-  module Yard
+  module YARD
     # Because RuboCop doesn't yet support plugins, we have to monkey patch in a
     # bit of our configuration.
     module Inject

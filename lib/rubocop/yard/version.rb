@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module RuboCop
-  module Yard
+  module YARD
     VERSION = "0.1.0"
   end
 end

@@ -1,16 +1,17 @@
 # frozen_string_literal: true
 
 require "bundler/gem_tasks"
+require "rake/testtask"
 require "rubocop/rake_task"
 
 RuboCop::RakeTask.new
 
-task default: :rubocop
+task default: [:test]
 
-require 'rspec/core/rake_task'
-
-RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.pattern = FileList['spec/**/*_spec.rb']
+Rake::TestTask.new do |task|
+  task.warning = false
+  task.libs = ["lib", "test"]
+  task.test_files = FileList["lib/**/*_test.rb"]
 end
 
 desc 'Generate a new cop with a template'
@@ -25,7 +26,6 @@ task :new_cop, [:cop] do |_task, args|
   generator = RuboCop::Cop::Generator.new(cop_name)
 
   generator.write_source
-  generator.write_spec
   generator.inject_require(root_file_path: 'lib/rubocop/cop/yard_cops.rb')
   generator.inject_config(config_file_path: 'config/default.yml')
 

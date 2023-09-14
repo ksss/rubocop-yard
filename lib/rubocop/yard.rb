@@ -3,7 +3,7 @@
 require_relative "yard/version"
 
 module RuboCop
-  module Yard
+  module YARD
     class Error < StandardError; end
     # Your code goes here...
     PROJECT_ROOT   = Pathname.new(__dir__).parent.parent.expand_path.freeze

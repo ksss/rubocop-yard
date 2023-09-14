@@ -1,3 +1,10 @@
+require:
+  './lib/rubocop/cop/yard_cops'
+
+AllCops:
+  NewCops: enable
 Naming/FileName:
  Exclude:
    - lib/rubocop-yard.rb
+Lint/Debugger:
+  Enabled: false
