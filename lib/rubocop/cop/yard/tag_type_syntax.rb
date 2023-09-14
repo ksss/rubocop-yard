@@ -8,15 +8,30 @@ module RuboCop
       #   @param [Integer String]
       #
       #   # bad
-      #   @return [TrueClass|FalseClass]
+      #   @param [Hash<Symbol, String>]
+      #
+      #   # bad
+      #   @param [Hash(String)]
+      #
+      #   # bad
+      #   @param [Array{Symbol => String}]
       #
       #   # good
       #   @param [Integer, String]
       #
       #   # good
-      #   @return [Boolean]
+      #   @param [<String>]
+      #   @param [Array<String>]
+      #
+      #   # good
+      #   @param [(String)]
+      #   @param [Array(String)]
+      #
+      #   # good
+      #   @param [{KeyType => ValueType}]
+      #   @param [Hash{KeyType => ValueType}]
       class TagTypeSyntax < Base
-        MSG = 'SyntaxError as YARD tag type'
+        MSG = ''
         include RangeHelp # @return [void,]
 
         def on_new_investigation
@@ -33,9 +48,49 @@ module RuboCop
         def check(comment)
           docstring = comment.text.gsub(/\A#\s*/, '')
           ::YARD::DocstringParser.new.parse(docstring).tags.each do |tag|
-            ::YARD::Tags::TypesExplainer::Parser.parse(tag.types.join(', '))
+            ::YARD::Tags::TypesExplainer::Parser.parse(tag.types.join(', ')).each do |types_explainer|
+              check_mismatch_collection_type(comment, types_explainer)
+            end
           rescue SyntaxError
-            add_offense(tag_range(comment))
+            add_offense(tag_range_for_comment(comment), message: 'SyntaxError as YARD tag type')
+          end
+        end
+
+        def check_mismatch_collection_type(comment, types_explainer)
+          case types_explainer
+          when ::YARD::Tags::TypesExplainer::HashCollectionType
+            if types_explainer.name == 'Hash'
+              types_explainer.key_types.each { |t| check_mismatch_collection_type(comment, t) }
+              types_explainer.value_types.each { |t| check_mismatch_collection_type(comment, t) }
+            else
+              message = "`{KeyType => ValueType}` is the hash collection type syntax. #{did_you_mean_type(types_explainer.name)}"
+              add_offense(tag_range_for_comment(comment), message: message)
+            end
+          when ::YARD::Tags::TypesExplainer::FixedCollectionType
+            if types_explainer.name == 'Array'
+              types_explainer.types.each { |t| check_mismatch_collection_type(comment, t) }
+            else
+              message = "`(Type)` is the fixed collection type syntax. #{did_you_mean_type(types_explainer.name)}"
+              add_offense(tag_range_for_comment(comment), message: message)
+            end
+          when ::YARD::Tags::TypesExplainer::CollectionType
+            if types_explainer.name == 'Array'
+              types_explainer.types.each { |t| check_mismatch_collection_type(comment, t) }
+            else
+              message = "`<Type>` is the collection type syntax. #{did_you_mean_type(types_explainer.name)}"
+              add_offense(tag_range_for_comment(comment), message: message)
+            end
+          end
+        end
+
+        def did_you_mean_type(name)
+          case name
+          when 'Hash'
+            'Did you mean `{KeyType => ValueType}` or `Hash{KeyType => ValueType}`'
+          when 'Array'
+            'Did you mean `<Type>` or `Array<Type>`'
+          else
+            ''
           end
         end
 
@@ -47,7 +102,7 @@ module RuboCop
           comment.source.match?(/@(?:param|return)\s+\[.*\]/)
         end
 
-        def tag_range(comment)
+        def tag_range_for_comment(comment)
           start_column = comment.source.index(/\[/) + 1
           end_column = comment.source.index(/\]/)
           offense_start = comment.location.column + start_column

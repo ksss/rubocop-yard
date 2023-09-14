@@ -10,6 +10,16 @@ You can check YARD format in Ruby code comment by RuboCop.
 
 Check tag type syntax error.
 
+```
+@param [Symbol|String]
+        ^^^^^^^^^^^^^ SyntaxError as YARD tag type
+```
+
+```
+@param [Hash<Symbol, String>]
+        ^^^^^^^^^^^^^^^^^^^^ <Type> is the collection type syntax. Did you mean {KeyType => ValueType} or Hash{KeyType => ValueType}
+```
+
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
