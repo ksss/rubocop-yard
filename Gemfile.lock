@@ -34,7 +34,6 @@ GEM
     reline (0.3.8)
       io-console (~> 0.5)
     rexml (3.2.6)
-    rgot (1.4.0)
     rubocop (1.56.2)
       base64 (~> 0.1.1)
       json (~> 2.3)
@@ -60,7 +59,6 @@ PLATFORMS
 DEPENDENCIES
   debug
   rake (~> 13.0)
-  rgot
   rubocop (~> 1.21)
   rubocop-yard!
 
