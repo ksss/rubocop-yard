@@ -1,10 +1,31 @@
+inherit_from: .rubocop_todo.yml
+
 require:
   './lib/rubocop/cop/yard_cops'
 
-AllCops:
-  NewCops: enable
-Naming/FileName:
- Exclude:
-   - lib/rubocop-yard.rb
-Lint/Debugger:
+Layout:
   Enabled: false
+
+Metrics:
+  Enabled: false
+
+Naming:
+  Enabled: false
+
+Style:
+  Enabled: false
+
+Lint:
+  Enabled: false
+
+Gemspec/DeprecatedAttributeAssignment: # new in 1.30
+  Enabled: true
+Gemspec/DevelopmentDependencies: # new in 1.44
+  Enabled: true
+Gemspec/RequireMFA: # new in 1.23
+  Enabled: true
+
+Security/CompoundHash: # new in 1.28
+  Enabled: true
+Security/IoMethods: # new in 1.22
+  Enabled: true

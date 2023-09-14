@@ -6,13 +6,7 @@ require "rubocop/rake_task"
 
 RuboCop::RakeTask.new
 
-task default: [:test]
-
-Rake::TestTask.new do |task|
-  task.warning = false
-  task.libs = ["lib", "test"]
-  task.test_files = FileList["lib/**/*_test.rb"]
-end
+task default: [:rubocop]
 
 desc 'Generate a new cop with a template'
 task :new_cop, [:cop] do |_task, args|
