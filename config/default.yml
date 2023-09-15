@@ -1,4 +1,4 @@
 YARD/TagType:
   Description: 'Check syntax for yard tag type'
   Enabled: true
-  VersionAdded: '0.1.0'
+  VersionAdded: '0.2.0'
