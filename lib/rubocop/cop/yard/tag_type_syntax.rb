@@ -99,7 +99,7 @@ module RuboCop
         end
 
         def include_yard_tag?(comment)
-          comment.source.match?(/@(?:param|return)\s+\[.*\]/)
+          comment.source.match?(/@(?:param|return|option)\s+\[.*\]/)
         end
 
         def tag_range_for_comment(comment)
