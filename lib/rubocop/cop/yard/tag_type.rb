@@ -50,6 +50,8 @@ module RuboCop
         def check(comment)
           docstring = comment.text.gsub(/\A#\s*/, '')
           ::YARD::DocstringParser.new.parse(docstring).tags.each do |tag|
+            next unless tag.types
+
             ::YARD::Tags::TypesExplainer::Parser.parse(tag.types.join(', ')).each do |types_explainer|
               check_mismatch_collection_type(comment, types_explainer)
             end
