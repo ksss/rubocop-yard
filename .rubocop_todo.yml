@@ -15,6 +15,6 @@ Bundler/OrderedGems:
     - 'Gemfile'
 
 # Offense count: 4
-YARD/TagTypeSyntax:
+YARD/TagType:
   Exclude:
-    - 'lib/rubocop/cop/yard/tag_type_syntax.rb'
+    - 'lib/rubocop/cop/yard/tag_type.rb'

@@ -22,6 +22,8 @@ module RuboCop
       #   # good
       #   @param [<String>]
       #   @param [Array<String>]
+      #   @param [List<String>]
+      #   @param [Array<(String, Fixnum, Hash)>]
       #
       #   # good
       #   @param [(String)]
@@ -30,7 +32,7 @@ module RuboCop
       #   # good
       #   @param [{KeyType => ValueType}]
       #   @param [Hash{KeyType => ValueType}]
-      class TagTypeSyntax < Base
+      class TagType < Base
         MSG = ''
         include RangeHelp # @return [void,]
 
@@ -63,34 +65,24 @@ module RuboCop
               types_explainer.key_types.each { |t| check_mismatch_collection_type(comment, t) }
               types_explainer.value_types.each { |t| check_mismatch_collection_type(comment, t) }
             else
-              message = "`{KeyType => ValueType}` is the hash collection type syntax. #{did_you_mean_type(types_explainer.name)}"
+              did_you_mean = types_explainer.name == 'Array' ? 'Did you mean `<Type>` or `Array<Type>`' : ''
+              message = "`{KeyType => ValueType}` is the hash collection type syntax. #{did_you_mean}"
               add_offense(tag_range_for_comment(comment), message: message)
             end
           when ::YARD::Tags::TypesExplainer::FixedCollectionType
-            if types_explainer.name == 'Array'
-              types_explainer.types.each { |t| check_mismatch_collection_type(comment, t) }
-            else
-              message = "`(Type)` is the fixed collection type syntax. #{did_you_mean_type(types_explainer.name)}"
+            if types_explainer.name == 'Hash'
+              message = "`(Type)` is the fixed collection type syntax. Did you mean `{KeyType => ValueType}` or `Hash{KeyType => ValueType}`"
               add_offense(tag_range_for_comment(comment), message: message)
+            else
+              types_explainer.types.each { |t| check_mismatch_collection_type(comment, t) }
             end
           when ::YARD::Tags::TypesExplainer::CollectionType
-            if types_explainer.name == 'Array'
-              types_explainer.types.each { |t| check_mismatch_collection_type(comment, t) }
-            else
-              message = "`<Type>` is the collection type syntax. #{did_you_mean_type(types_explainer.name)}"
+            if types_explainer.name == 'Hash'
+              message = "`<Type>` is the collection type syntax. `{KeyType => ValueType}` or `Hash{KeyType => ValueType}` is more good"
               add_offense(tag_range_for_comment(comment), message: message)
+            else
+              types_explainer.types.each { |t| check_mismatch_collection_type(comment, t) }
             end
-          end
-        end
-
-        def did_you_mean_type(name)
-          case name
-          when 'Hash'
-            'Did you mean `{KeyType => ValueType}` or `Hash{KeyType => ValueType}`'
-          when 'Array'
-            'Did you mean `<Type>` or `Array<Type>`'
-          else
-            ''
           end
         end
 

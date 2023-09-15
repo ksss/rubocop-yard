@@ -5,7 +5,7 @@ module RuboCop
   end
   module Cop
     module YARD
-      class TagTypeSyntax
+      class TagType
         type t = YARD::Tags::TypesExplainer::Type
                | ::YARD::Tags::TypesExplainer::CollectionType
                | ::YARD::Tags::TypesExplainer::FixedCollectionType

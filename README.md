@@ -6,7 +6,7 @@ You can check YARD format in Ruby code comment by RuboCop.
 
 ## Features
 
-### `YARD/TagTypeSyntax`
+### `YARD/TagType`
 
 Check tag type syntax error.
 
