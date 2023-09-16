@@ -17,7 +17,19 @@ Check tag type syntax error.
 
 ```
 @param [Hash<Symbol, String>]
-        ^^^^^^^^^^^^^^^^^^^^ <Type> is the collection type syntax. Did you mean {KeyType => ValueType} or Hash{KeyType => ValueType}
+        ^^^^^^^^^^^^^^^^^^^^ `<Type>` is the collection type syntax. Did you mean `{KeyType => ValueType}` or `Hash{KeyType => ValueType}`
+```
+
+### `YARD/MismatchName``
+
+Check `@param` and `@option` name with method definition.
+
+```
+@param [String] string
+                ^^^^^^ `string` is not found in method arguments
+@option opt bar [String]
+        ^^^ `opt` is not found in method arguments
+def foo(strings, opts = {})
 ```
 
 ## Installation

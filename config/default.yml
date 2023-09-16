@@ -2,3 +2,8 @@ YARD/TagType:
   Description: 'Check syntax for yard tag type'
   Enabled: true
   VersionAdded: '0.2.0'
+
+YARD/MismatchName
+  Description: 'Check @param and @option name and method parameters'
+  Enabled: true
+  VersionAdded: '0.3.0'
