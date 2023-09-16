@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.3.0] - 2023-09-16
+
+- Add `YARD/MismatchName`
+    - Check `@param` and `@option` name with method definition
+
 ## [0.2.0] - 2023-09-14
 
 - `YARD/TagType`
