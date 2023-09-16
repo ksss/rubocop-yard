@@ -20,7 +20,7 @@ Check tag type syntax error.
         ^^^^^^^^^^^^^^^^^^^^ `<Type>` is the collection type syntax. Did you mean `{KeyType => ValueType}` or `Hash{KeyType => ValueType}`
 ```
 
-### `YARD/MismatchName``
+### `YARD/MismatchName`
 
 Check `@param` and `@option` name with method definition.
 
