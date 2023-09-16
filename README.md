@@ -11,24 +11,24 @@ You can check YARD format in Ruby code comment by RuboCop.
 Check tag type syntax error.
 
 ```
-@param [Symbol|String]
-        ^^^^^^^^^^^^^ SyntaxError as YARD tag type
+# @param [Symbol|String]
+#         ^^^^^^^^^^^^^ SyntaxError as YARD tag type
 ```
 
 ```
-@param [Hash<Symbol, String>]
-        ^^^^^^^^^^^^^^^^^^^^ `<Type>` is the collection type syntax. Did you mean `{KeyType => ValueType}` or `Hash{KeyType => ValueType}`
+# @param [Hash<Symbol, String>]
+#         ^^^^^^^^^^^^^^^^^^^^ `<Type>` is the collection type syntax. Did you mean `{KeyType => ValueType}` or `Hash{KeyType => ValueType}`
 ```
 
 ### `YARD/MismatchName`
 
 Check `@param` and `@option` name with method definition.
 
-```
-@param [String] string
-                ^^^^^^ `string` is not found in method arguments
-@option opt bar [String]
-        ^^^ `opt` is not found in method arguments
+```rb
+# @param [String] string
+#                 ^^^^^^ `string` is not found in method arguments
+# @option opt bar [String]
+#         ^^^ `opt` is not found in method arguments
 def foo(strings, opts = {})
 ```
 
