@@ -3,7 +3,7 @@ YARD/TagType:
   Enabled: true
   VersionAdded: '0.2.0'
 
-YARD/MismatchName
+YARD/MismatchName:
   Description: 'Check @param and @option name and method parameters'
   Enabled: true
   VersionAdded: '0.3.0'
