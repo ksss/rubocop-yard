@@ -6,7 +6,12 @@ require "rubocop/rake_task"
 
 RuboCop::RakeTask.new
 
-task default: [:rubocop]
+task default: [:rubocop, :check_default_yml]
+
+task :check_default_yml do
+  require 'yaml'
+  YAML.safe_load_file('config/default.yml')
+end
 
 desc 'Generate a new cop with a template'
 task :new_cop, [:cop] do |_task, args|
