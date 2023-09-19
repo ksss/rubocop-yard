@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "rubocop_version": "1.56.2",
+    "ruby_engine": "ruby",
+    "ruby_version": "3.2.2",
+    "ruby_patchlevel": "53",
+    "ruby_platform": "arm64-darwin22"
+  },
+  "files": [
+    {
+      "path": "smoke/meaningless_tag.rb",
+      "offenses": [
+        {
+          "severity": "convention",
+          "message": "`@param` is meaningless tag on module",
+          "cop_name": "YARD/MeaninglessTag",
+          "corrected": false,
+          "correctable": false,
+          "location": {
+            "start_line": 1,
+            "start_column": 1,
+            "last_line": 1,
+            "last_column": 19,
+            "length": 19,
+            "line": 1,
+            "column": 1
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`@option` is meaningless tag on class",
+          "cop_name": "YARD/MeaninglessTag",
+          "corrected": false,
+          "correctable": false,
+          "location": {
+            "start_line": 3,
+            "start_column": 3,
+            "last_line": 3,
+            "last_column": 19,
+            "length": 17,
+            "line": 3,
+            "column": 3
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`@option` is meaningless tag on casgn",
+          "cop_name": "YARD/MeaninglessTag",
+          "corrected": false,
+          "correctable": false,
+          "location": {
+            "start_line": 5,
+            "start_column": 5,
+            "last_line": 5,
+            "last_column": 21,
+            "length": 17,
+            "line": 5,
+            "column": 5
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "offense_count": 3,
+    "target_file_count": 1,
+    "inspected_file_count": 1
+  }
+}
