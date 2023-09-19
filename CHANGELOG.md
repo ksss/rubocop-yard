@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.4.0] - 2023-09-19
+
+- Add new cop `YARD/MeaninglessTag`
+
 ## [0.3.1] - 2023-09-16
 
 Fix config/default.yml
