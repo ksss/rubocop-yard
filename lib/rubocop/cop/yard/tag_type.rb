@@ -3,7 +3,7 @@
 module RuboCop
   module Cop
     module YARD
-      # @example
+      # @example tag type
       #   # bad
       #   # @param [Integer String]
       #
