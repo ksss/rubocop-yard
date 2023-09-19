@@ -26,9 +26,15 @@ namespace :smoke do
       json_path = rb_path.gsub(/.rb$/, '.json')
       puts "Running #{rb_path} and #{json_path}"
       actual = `bundle exec rubocop --format json #{rb_path}`
+      actual_out = JSON.parse(actual).except("metadata")
       expect = File.read(json_path)
+      expect_out = JSON.parse(expect).except("metadata")
 
-      unless JSON.parse(actual).except("metadata") == JSON.parse(expect).except("metadata")
+      unless actual_out == expect_out
+        puts '---actual---'
+        pp actual_out
+        puts '---expect---'
+        pp expect_out
         raise "change output `rubocop #{rb_path}` with #{json_path}"
       end
     end
