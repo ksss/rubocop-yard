@@ -3,7 +3,7 @@
 module RuboCop
   module Cop
     module YARD
-      # @example
+      # @example meaningless tag
       #   # bad
       #   # @param [String] foo
       #   # @option bar baz [String]

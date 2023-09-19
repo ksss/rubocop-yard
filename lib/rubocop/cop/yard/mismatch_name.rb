@@ -3,7 +3,7 @@
 module RuboCop
   module Cop
     module YARD
-      # @example
+      # @example mismatch name
       #   # bad
       #   # @param [void] baz
       #   # @option opt aaa [void]
