@@ -15,7 +15,7 @@ end
 
 namespace :smoke do
   task :start_server do
-    sh "bundle exec rubocop --start-server"
+    sh "bundle exec rubocop --restart-server"
   end
 
   desc "Run testing for smoke files"
@@ -44,8 +44,9 @@ namespace :smoke do
   task regenerate: [:start_server] do
     Dir["smoke/*.rb"].each do |rb_path|
       json_path = rb_path.gsub(/.rb$/, '.json')
+      rm json_path
       puts "Generate #{json_path}"
-      system("bundle exec rubocop --format json #{rb_path} > #{json_path}")
+      system("bundle exec rubocop --format json #{rb_path} | jq > #{json_path}")
     end
   end
 end

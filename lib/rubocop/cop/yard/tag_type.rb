@@ -33,7 +33,6 @@ module RuboCop
       #   # @param [{KeyType => ValueType}]
       #   # @param [Hash{KeyType => ValueType}]
       class TagType < Base
-        MSG = ''
         include RangeHelp # @return [void,]
 
         def on_new_investigation
@@ -64,7 +63,7 @@ module RuboCop
           begin
             yield
           rescue SyntaxError => e
-            add_offense(tag_range_for_comment(comment), message: "(#{e.class})a #{e.message}")
+            add_offense(tag_range_for_comment(comment), message: "(#{e.class}) #{e.message}")
           end
         end
 
