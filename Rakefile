@@ -6,11 +6,42 @@ require "rubocop/rake_task"
 
 RuboCop::RakeTask.new
 
-task default: [:rubocop, :check_default_yml]
+task default: ['smoke:test', :check_default_yml]
 
 task :check_default_yml do
   require 'yaml'
   YAML.safe_load_file('config/default.yml')
+end
+
+namespace :smoke do
+  task :start_server do
+    sh "bundle exec rubocop --start-server"
+  end
+
+  desc "Run testing for smoke files"
+  task test: [:start_server] do
+    require 'json'
+
+    Dir["smoke/*.rb"].each do |rb_path|
+      json_path = rb_path.gsub(/.rb$/, '.json')
+      puts "Running #{rb_path} and #{json_path}"
+      actual = `bundle exec rubocop --format json #{rb_path}`
+      expect = File.read(json_path)
+
+      unless JSON.parse(actual).except("metadata") == JSON.parse(expect).except("metadata")
+        raise "change output `rubocop #{rb_path}` with #{json_path}"
+      end
+    end
+  end
+
+  desc "Regenerate smoke files"
+  task regenerate: [:start_server] do
+    Dir["smoke/*.rb"].each do |rb_path|
+      json_path = rb_path.gsub(/.rb$/, '.json')
+      puts "Generate #{json_path}"
+      system("bundle exec rubocop --format json #{rb_path} > #{json_path}")
+    end
+  end
 end
 
 desc 'Generate a new cop with a template'
