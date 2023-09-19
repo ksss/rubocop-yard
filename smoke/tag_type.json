@@ -25,12 +25,44 @@
             "line": 2,
             "column": 13
           }
+        },
+        {
+          "severity": "convention",
+          "message": "(SyntaxError) expecting END, got name 'bbb'",
+          "cop_name": "YARD/TagType",
+          "corrected": false,
+          "correctable": false,
+          "location": {
+            "start_line": 3,
+            "start_column": 22,
+            "last_line": 3,
+            "last_column": 29,
+            "length": 8,
+            "line": 3,
+            "column": 22
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "(SyntaxError) invalid character at -",
+          "cop_name": "YARD/TagType",
+          "corrected": false,
+          "correctable": false,
+          "location": {
+            "start_line": 4,
+            "start_column": 14,
+            "last_line": 4,
+            "last_column": 21,
+            "length": 8,
+            "line": 4,
+            "column": 14
+          }
         }
       ]
     }
   ],
   "summary": {
-    "offense_count": 1,
+    "offense_count": 3,
     "target_file_count": 1,
     "inspected_file_count": 1
   }

@@ -48,11 +48,12 @@ module RuboCop
 
         def check(comment)
           docstring = comment.text.gsub(/\A#\s*/, '')
-          check_syntax_error(comment) do
-            ::YARD::DocstringParser.new.parse(docstring).tags.each do |tag|
-              next unless tag.types
+          ::YARD::DocstringParser.new.parse(docstring).tags.each do |tag|
+            types = extract_tag_type(tag)
 
-              ::YARD::Tags::TypesExplainer::Parser.parse(tag.types.join(', ')).each do |types_explainer|
+            check_syntax_error(comment) do
+              types_explainers = ::YARD::Tags::TypesExplainer::Parser.parse(types.join(', '))
+              types_explainers.each do |types_explainer|
                 check_mismatch_collection_type(comment, types_explainer)
               end
             end
@@ -95,12 +96,21 @@ module RuboCop
           end
         end
 
+        def extract_tag_type(tag)
+          case tag
+          when ::YARD::Tags::OptionTag
+            tag.pair.types
+          else
+            tag.types
+          end
+        end
+
         def inline_comment?(comment)
           !comment_line?(comment.source_range.source_line)
         end
 
         def include_yard_tag?(comment)
-          comment.source.match?(/@(?:param|return|option|raise|yieldparam|yieldreturn)\s+\[.*\]/)
+          comment.source.match?(/@(?:param|return|option|raise|yieldparam|yieldreturn)\s+.*\[.*\]/)
         end
 
         def tag_range_for_comment(comment)
