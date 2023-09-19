@@ -5,33 +5,33 @@ module RuboCop
     module YARD
       # @example
       #   # bad
-      #   @param [Integer String]
+      #   # @param [Integer String]
       #
       #   # bad
-      #   @param [Hash<Symbol, String>]
+      #   # @param [Hash<Symbol, String>]
       #
       #   # bad
-      #   @param [Hash(String)]
+      #   # @param [Hash(String)]
       #
       #   # bad
-      #   @param [Array{Symbol => String}]
+      #   # @param [Array{Symbol => String}]
       #
       #   # good
-      #   @param [Integer, String]
+      #   # @param [Integer, String]
       #
       #   # good
-      #   @param [<String>]
-      #   @param [Array<String>]
-      #   @param [List<String>]
-      #   @param [Array<(String, Fixnum, Hash)>]
+      #   # @param [<String>]
+      #   # @param [Array<String>]
+      #   # @param [List<String>]
+      #   # @param [Array<(String, Fixnum, Hash)>]
       #
       #   # good
-      #   @param [(String)]
-      #   @param [Array(String)]
+      #   # @param [(String)]
+      #   # @param [Array(String)]
       #
       #   # good
-      #   @param [{KeyType => ValueType}]
-      #   @param [Hash{KeyType => ValueType}]
+      #   # @param [{KeyType => ValueType}]
+      #   # @param [Hash{KeyType => ValueType}]
       class TagType < Base
         MSG = ''
         include RangeHelp # @return [void,]
@@ -49,14 +49,22 @@ module RuboCop
 
         def check(comment)
           docstring = comment.text.gsub(/\A#\s*/, '')
-          ::YARD::DocstringParser.new.parse(docstring).tags.each do |tag|
-            next unless tag.types
+          check_syntax_error(comment) do
+            ::YARD::DocstringParser.new.parse(docstring).tags.each do |tag|
+              next unless tag.types
 
-            ::YARD::Tags::TypesExplainer::Parser.parse(tag.types.join(', ')).each do |types_explainer|
-              check_mismatch_collection_type(comment, types_explainer)
+              ::YARD::Tags::TypesExplainer::Parser.parse(tag.types.join(', ')).each do |types_explainer|
+                check_mismatch_collection_type(comment, types_explainer)
+              end
             end
-          rescue SyntaxError
-            add_offense(tag_range_for_comment(comment), message: 'SyntaxError as YARD tag type')
+          end
+        end
+
+        def check_syntax_error(comment)
+          begin
+            yield
+          rescue SyntaxError => e
+            add_offense(tag_range_for_comment(comment), message: "(#{e.class})a #{e.message}")
           end
         end
 
