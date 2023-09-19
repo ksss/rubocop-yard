@@ -12,7 +12,7 @@ module RuboCop
       #
       #   # good
       #   # @param [void] bar
-      #   # @param [Array] argsa
+      #   # @param [Array] arg
       #   # @option opts aaa [void]
       #   def foo(bar, opts = {}, *arg)
       #   end
