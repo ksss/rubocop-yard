@@ -10,10 +10,11 @@ YARD/TagTypeSyntax:
 
 YARD/CollectionType:
   Description: 'Check collection type syntax'
-  EnforcedStyle: long
-  SupportedStyles:
-    - long
-    - short
+  Enabled: true
+  # EnforcedStyle: long
+  # SupportedStyles:
+  #   - long
+  #   - short
 
 YARD/MismatchName:
   Description: 'Check @param and @option name and method parameters'
