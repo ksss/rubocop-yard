@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+- Split cop from `YARD/TagType` to
+    - `YARD/TagTypeSyntax`
+    - `YARD/CollectionType`
+
 ## [0.4.0] - 2023-09-19
 
 - Add new cop `YARD/MeaninglessTag`

@@ -8,52 +8,52 @@
   },
   "files": [
     {
-      "path": "smoke/tag_type.rb",
+      "path": "smoke/collection_type.rb",
       "offenses": [
         {
           "severity": "convention",
-          "message": "(SyntaxError) invalid character at |",
-          "cop_name": "YARD/TagType",
+          "message": "`(Type)` is the fixed collection type syntax. Did you mean `{KeyType => ValueType}` or `Hash{KeyType => ValueType}`",
+          "cop_name": "YARD/CollectionType",
           "corrected": false,
           "correctable": false,
           "location": {
             "start_line": 2,
             "start_column": 13,
             "last_line": 2,
-            "last_column": 20,
-            "length": 8,
+            "last_column": 25,
+            "length": 13,
             "line": 2,
             "column": 13
           }
         },
         {
           "severity": "convention",
-          "message": "(SyntaxError) expecting END, got name 'bbb'",
-          "cop_name": "YARD/TagType",
+          "message": "`{KeyType => ValueType}` is the hash collection type syntax. Did you mean `<Type>` or `Array<Type>`",
+          "cop_name": "YARD/CollectionType",
           "corrected": false,
           "correctable": false,
           "location": {
             "start_line": 3,
-            "start_column": 22,
+            "start_column": 13,
             "last_line": 3,
-            "last_column": 29,
-            "length": 8,
+            "last_column": 36,
+            "length": 24,
             "line": 3,
-            "column": 22
+            "column": 13
           }
         },
         {
           "severity": "convention",
-          "message": "(SyntaxError) invalid character at -",
-          "cop_name": "YARD/TagType",
+          "message": "`<Type>` is the collection type syntax. `{KeyType => ValueType}` or `Hash{KeyType => ValueType}` is more good",
+          "cop_name": "YARD/CollectionType",
           "corrected": false,
           "correctable": false,
           "location": {
             "start_line": 4,
             "start_column": 14,
             "last_line": 4,
-            "last_column": 21,
-            "length": 8,
+            "last_column": 34,
+            "length": 21,
             "line": 4,
             "column": 14
           }

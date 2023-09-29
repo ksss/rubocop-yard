@@ -6,7 +6,7 @@ You can check YARD format in Ruby code comment by RuboCop.
 
 ## Features
 
-### `YARD/TagType`
+### `YARD/TagTypeSyntax`
 
 Check tag type syntax error.
 
@@ -14,6 +14,8 @@ Check tag type syntax error.
 # @param [Symbol|String]
           ^^^^^^^^^^^^^ SyntaxError as YARD tag type
 ```
+
+### `YARD/CollectionType`
 
 ```
 # @param [Hash<Symbol, String>]

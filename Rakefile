@@ -44,7 +44,7 @@ namespace :smoke do
   task regenerate: [:start_server] do
     Dir["smoke/*.rb"].each do |rb_path|
       json_path = rb_path.gsub(/.rb$/, '.json')
-      rm json_path
+      rm json_path rescue nil
       puts "Generate #{json_path}"
       system("bundle exec rubocop --format json #{rb_path} | jq > #{json_path}")
     end
