@@ -11,6 +11,7 @@ YARD/TagTypeSyntax:
 YARD/CollectionType:
   Description: 'Check collection type syntax'
   Enabled: true
+  VersionAdded: '0.5.0'
   # EnforcedStyle: long
   # SupportedStyles:
   #   - long
