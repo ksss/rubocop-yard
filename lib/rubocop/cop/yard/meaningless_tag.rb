@@ -22,6 +22,7 @@ module RuboCop
       class MeaninglessTag < Base
         include RangeHelp
         include DocumentationComment
+        extend AutoCorrector
 
         def on_class(node)
           check(node)
@@ -41,7 +42,9 @@ module RuboCop
             comment = preceding_lines.find { |line| line.text.include?("@#{tag.tag_name}") }
             next unless comment
 
-            add_offense(comment, message: "`@#{tag.tag_name}` is meaningless tag on #{node.type}")
+            add_offense(comment, message: "`@#{tag.tag_name}` is meaningless tag on #{node.type}") do |corrector|
+              corrector.replace(comment, comment.text.gsub("@#{tag.tag_name}", tag.tag_name))
+            end
           end
         end
       end

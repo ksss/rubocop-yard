@@ -15,7 +15,7 @@
           "message": "`@param` is meaningless tag on module",
           "cop_name": "YARD/MeaninglessTag",
           "corrected": false,
-          "correctable": false,
+          "correctable": true,
           "location": {
             "start_line": 1,
             "start_column": 1,
@@ -31,7 +31,7 @@
           "message": "`@option` is meaningless tag on class",
           "cop_name": "YARD/MeaninglessTag",
           "corrected": false,
-          "correctable": false,
+          "correctable": true,
           "location": {
             "start_line": 3,
             "start_column": 3,
@@ -47,7 +47,7 @@
           "message": "`@option` is meaningless tag on casgn",
           "cop_name": "YARD/MeaninglessTag",
           "corrected": false,
-          "correctable": false,
+          "correctable": true,
           "location": {
             "start_line": 5,
             "start_column": 5,
