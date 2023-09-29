@@ -5,9 +5,6 @@ module RuboCop
     module YARD
       # @example tag type
       #   # bad
-      #   # @param [Integer String]
-      #
-      #   # bad
       #   # @param [Hash<Symbol, String>]
       #
       #   # bad
@@ -15,9 +12,6 @@ module RuboCop
       #
       #   # bad
       #   # @param [Array{Symbol => String}]
-      #
-      #   # good
-      #   # @param [Integer, String]
       #
       #   # good
       #   # @param [<String>]
@@ -32,8 +26,8 @@ module RuboCop
       #   # good
       #   # @param [{KeyType => ValueType}]
       #   # @param [Hash{KeyType => ValueType}]
-      class TagType < Base
-        include RangeHelp # @return [void,]
+      class CollectionType < Base
+        include RangeHelp
 
         def on_new_investigation
           processed_source.comments.each do |comment|
@@ -51,20 +45,13 @@ module RuboCop
           ::YARD::DocstringParser.new.parse(docstring).tags.each do |tag|
             types = extract_tag_type(tag)
 
-            check_syntax_error(comment) do
+            begin
               types_explainers = ::YARD::Tags::TypesExplainer::Parser.parse(types.join(', '))
               types_explainers.each do |types_explainer|
                 check_mismatch_collection_type(comment, types_explainer)
               end
+            rescue SyntaxError => e
             end
-          end
-        end
-
-        def check_syntax_error(comment)
-          begin
-            yield
-          rescue SyntaxError => e
-            add_offense(tag_range_for_comment(comment), message: "(#{e.class}) #{e.message}")
           end
         end
 

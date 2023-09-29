@@ -13,8 +13,3 @@
 Bundler/OrderedGems:
   Exclude:
     - 'Gemfile'
-
-# Offense count: 4
-YARD/TagType:
-  Exclude:
-    - 'lib/rubocop/cop/yard/tag_type.rb'
