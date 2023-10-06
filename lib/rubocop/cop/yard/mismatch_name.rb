@@ -29,6 +29,7 @@ module RuboCop
           yard_docstring = preceding_lines.map { |line| line.text.gsub(/\A#\s*/, '') }.join("\n")
           docstring = ::YARD::DocstringParser.new.parse(yard_docstring)
           docstring.tags.each do |tag|
+            next unless tag.name
             next unless tag.tag_name == 'param' || tag.tag_name == 'option'
             next unless node.arguments.none? { |arg_node| tag.name.to_sym == arg_node.name }
 
