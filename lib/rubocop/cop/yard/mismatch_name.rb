@@ -28,30 +28,47 @@ module RuboCop
 
           yard_docstring = preceding_lines.map { |line| line.text.gsub(/\A#\s*/, '') }.join("\n")
           docstring = ::YARD::DocstringParser.new.parse(yard_docstring)
-          docstring.tags.each do |tag|
-            next unless tag.name
+          docstring.tags.each_with_index do |tag, i|
             next unless tag.tag_name == 'param' || tag.tag_name == 'option'
-            next unless node.arguments.none? { |arg_node| tag.name.to_sym == arg_node.name }
 
-            tag_name_regexp = Regexp.new("\\b#{Regexp.escape(tag.name)}\\b")
-            comment = preceding_lines.find { |line| line.text.match?(tag_name_regexp) && line.text.include?("@#{tag.tag_name}") }
+            comment = find_by_tag(preceding_lines, tag, i)
             next unless comment
 
-            start_column = comment.source.index(tag_name_regexp)
-            offense_start = comment.location.column + start_column
-            offense_end = offense_start + tag.name.length - 1
-            range = source_range(processed_source.buffer, comment.location.line, offense_start..offense_end)
-            add_offense(range, message: "`#{tag.name}` is not found in method arguments")
+            unless tag.name && tag.types
+              if tag.name.nil?
+                add_offense(comment, message: "No tag name is supplied in `@#{tag.tag_name}`")
+              elsif tag.types.nil?
+                add_offense(comment, message: "No types are associated with the tag in `@#{tag.tag_name}`")
+              end
+
+              next
+            end
+
+            next unless node.arguments.none? { |arg_node| tag.name.to_sym == arg_node.name }
+
+            add_offense_to_tag(comment, tag)
           end
         end
         alias on_defs on_def
-      end
 
-      private
+        private
 
-      # @param [void] aaa
-      # @option opts bbb [void]
-      def dummy(aaa, opts = {}, *)
+        def find_by_tag(preceding_lines, tag, i)
+          count = -1
+          preceding_lines.find do |line|
+            count += 1 if line.text.include?("@#{tag.tag_name}")
+            count == i
+          end
+        end
+
+        def add_offense_to_tag(comment, tag)
+          tag_name_regexp = Regexp.new("\\b#{Regexp.escape(tag.name)}\\b")
+          start_column = comment.source.index(tag_name_regexp)
+          offense_start = comment.location.column + start_column
+          offense_end = offense_start + tag.name.length - 1
+          range = source_range(processed_source.buffer, comment.location.line, offense_start..offense_end)
+          add_offense(range, message: "`#{tag.name}` is not found in method arguments")
+        end
       end
     end
   end
