@@ -8,6 +8,15 @@ YARD/TagTypeSyntax:
   Enabled: true
   VersionAdded: '0.5.0'
 
+YARD/CollectionStyle:
+  Description: 'Check collection type style'
+  Enabled: true
+  VersionAdded: '0.5.0'
+  EnforcedStyle: long
+  SupportedStyles:
+    - long
+    - short
+
 YARD/CollectionType:
   Description: 'Check collection type syntax'
   Enabled: true

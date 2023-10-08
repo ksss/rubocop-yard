@@ -1,14 +1,11 @@
 class Foo
-  # @param [(Symbol)]
-  # @param [<Symbol>]
-  # @param [{Symbol => String}]
-  # @param [Array(Symbol)]
-  # @param [Array<Symbol>]
-  # @param [<<<Symbol>>>]
-  # @param [Hash{Symbol => String}]
-  # @param [Range<Integer>]
-  # @param [Dict{Symbol => String}]
-  # @param [Array<{Symbol => <Integer>, List<Integer>}>]
+  # @param [Hash(Symbol)]
+  # @param [Array{Symbol => String}]
+  # @param [Hash(Symbol)]
+  # @param [Hash(Symbol, String)]
+  # @param [Hash<Symbol>]
+  # @param [Hash<Symbol, String>]
+  # @param [Hash<Symbol, {Symbol => Range<Integer>}>]
   def foo
   end
 end

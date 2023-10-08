@@ -24,8 +24,11 @@ namespace :smoke do
     'YARD/MismatchName' => [
       { name: "mismatch_name" }
     ],
+    'YARD/CollectionStyle' => [
+      { name: "collection_style", style: "long" },
+      { name: "collection_style", style: "short" },
+    ],
     'YARD/CollectionType' => [
-      { name: "collection_type", correct: true },
       { name: "collection_type", style: "long" },
       { name: "collection_type", style: "short" },
     ],

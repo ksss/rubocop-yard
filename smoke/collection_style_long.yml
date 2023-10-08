@@ -1,0 +1,5 @@
+require:
+  '../lib/rubocop-yard'
+
+YARD/CollectionStyle:
+  EnforcedStyle: long

@@ -12,73 +12,121 @@
       "offenses": [
         {
           "severity": "convention",
-          "message": "`Array(Symbol)` is using long style syntax",
+          "message": "`(Type)` is the fixed collection type syntax.",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 2,
+            "start_column": 13,
+            "last_line": 2,
+            "last_column": 25,
+            "length": 13,
+            "line": 2,
+            "column": 13
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`{KeyType => ValueType}` is the Hash collection type syntax.",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 3,
+            "start_column": 13,
+            "last_line": 3,
+            "last_column": 36,
+            "length": 24,
+            "line": 3,
+            "column": 13
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`(Type)` is the fixed collection type syntax.",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 4,
+            "start_column": 13,
+            "last_line": 4,
+            "last_column": 25,
+            "length": 13,
+            "line": 4,
+            "column": 13
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`Hash(Key, Value)` is miswritten of `Hash<Key, Value>` in perhaps",
           "cop_name": "YARD/CollectionType",
           "corrected": false,
           "correctable": true,
           "location": {
             "start_line": 5,
-            "start_column": 3,
+            "start_column": 13,
             "last_line": 5,
-            "last_column": 26,
-            "length": 24,
+            "last_column": 33,
+            "length": 21,
             "line": 5,
-            "column": 3
+            "column": 13
           }
         },
         {
           "severity": "convention",
-          "message": "`Array<Symbol>` is using long style syntax",
+          "message": "`<Type>` is the collection type syntax.",
           "cop_name": "YARD/CollectionType",
           "corrected": false,
           "correctable": true,
           "location": {
             "start_line": 6,
-            "start_column": 3,
+            "start_column": 13,
             "last_line": 6,
-            "last_column": 26,
-            "length": 24,
+            "last_column": 25,
+            "length": 13,
             "line": 6,
-            "column": 3
+            "column": 13
           }
         },
         {
           "severity": "convention",
-          "message": "`Hash{Symbol => String}` is using long style syntax",
+          "message": "`Hash<Key, Value>` is the documented hash specific syntax",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 7,
+            "start_column": 13,
+            "last_line": 7,
+            "last_column": 33,
+            "length": 21,
+            "line": 7,
+            "column": 13
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`Hash<Key, Value>` is the documented hash specific syntax",
           "cop_name": "YARD/CollectionType",
           "corrected": false,
           "correctable": true,
           "location": {
             "start_line": 8,
-            "start_column": 3,
+            "start_column": 13,
             "last_line": 8,
-            "last_column": 35,
-            "length": 33,
+            "last_column": 53,
+            "length": 41,
             "line": 8,
-            "column": 3
-          }
-        },
-        {
-          "severity": "convention",
-          "message": "`Array<{Symbol => <Integer>, List<Integer>}>` is using long style syntax",
-          "cop_name": "YARD/CollectionType",
-          "corrected": false,
-          "correctable": true,
-          "location": {
-            "start_line": 11,
-            "start_column": 3,
-            "last_line": 11,
-            "last_column": 56,
-            "length": 54,
-            "line": 11,
-            "column": 3
+            "column": 13
           }
         }
       ]
     }
   ],
   "summary": {
-    "offense_count": 4,
+    "offense_count": 7,
     "target_file_count": 1,
     "inspected_file_count": 1
   }
