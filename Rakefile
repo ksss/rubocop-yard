@@ -41,7 +41,7 @@ namespace :smoke do
   task test: [:start_server] do
     require 'json'
 
-    each_config do |cop, content, rb_path, json_path, cmd|
+    each_config do |cop, content, with_style_name, rb_path, json_path, cmd|
       puts "Running #{rb_path} and #{json_path}"
       actual = `#{cmd} #{rb_path}`
       actual_out = JSON.parse(actual).except("metadata")
@@ -55,6 +55,15 @@ namespace :smoke do
         pp expect_out
         raise "change output `rubocop #{rb_path}` with #{json_path}"
       end
+
+      if content[:correct]
+        corrected_path = "smoke/generated/#{with_style_name}_correct.rb"
+        puts "Running #{corrected_path}"
+        actual = `#{cmd} #{corrected_path}`
+        unless JSON.parse(actual)["summary"]["offense_count"] == 0
+          raise "unexpected autocorrected output #{corrected_path}"
+        end
+      end
     end
   end
 
@@ -62,11 +71,11 @@ namespace :smoke do
   task regenerate: [:start_server] do
     require 'tempfile'
 
-    each_config do |cop, content, rb_path, json_path, cmd|
+    each_config do |cop, content, with_style_name, rb_path, json_path, cmd|
       rm json_path rescue nil
       puts "Generate #{json_path}"
       if content[:correct]
-        correct_path = "#{rb_path.gsub('.rb', '')}_correct.rb"
+        correct_path = "smoke/generated/#{with_style_name}_correct.rb"
         IO.copy_stream(rb_path, correct_path)
         sh("#{cmd} --autocorrect #{correct_path}")
       end
@@ -82,15 +91,16 @@ namespace :smoke do
         else
           ""
         end
-        rb_path = "smoke/#{content[:name]}#{with_style}.rb"
-        json_path = rb_path.gsub(/.rb$/, '.json')
+        with_style_name = "#{content[:name]}#{with_style}"
+        rb_path = "smoke/#{with_style_name}.rb"
+        json_path = "smoke/generated/#{with_style_name}.json"
         cmds = ["bundle", "exec", "rubocop", "--only", cop, "--format", "json"]
         if content[:style]
-          cmds << '--config' << "smoke/#{content[:name]}_#{content[:style]}.yml"
+          cmds << '--config' << "smoke/#{with_style_name}.yml"
         else
           cmds << '--config' << ".rubocop.yml"
         end
-        yield [cop, content, rb_path, json_path, cmds.join(' ')]
+        yield [cop, content, with_style_name, rb_path, json_path, cmds.join(' ')]
       end
     end
   end

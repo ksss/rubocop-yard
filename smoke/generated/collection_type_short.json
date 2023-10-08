@@ -8,7 +8,7 @@
   },
   "files": [
     {
-      "path": "smoke/collection_type_long.rb",
+      "path": "smoke/collection_type_short.rb",
       "offenses": [
         {
           "severity": "convention",
@@ -33,12 +33,12 @@
           "corrected": false,
           "correctable": true,
           "location": {
-            "start_line": 3,
+            "start_line": 4,
             "start_column": 13,
-            "last_line": 3,
+            "last_line": 4,
             "last_column": 36,
             "length": 24,
-            "line": 3,
+            "line": 4,
             "column": 13
           }
         },
@@ -49,12 +49,12 @@
           "corrected": false,
           "correctable": true,
           "location": {
-            "start_line": 4,
+            "start_line": 5,
             "start_column": 13,
-            "last_line": 4,
+            "last_line": 5,
             "last_column": 25,
             "length": 13,
-            "line": 4,
+            "line": 5,
             "column": 13
           }
         },
@@ -65,12 +65,12 @@
           "corrected": false,
           "correctable": true,
           "location": {
-            "start_line": 5,
+            "start_line": 6,
             "start_column": 13,
-            "last_line": 5,
+            "last_line": 6,
             "last_column": 33,
             "length": 21,
-            "line": 5,
+            "line": 6,
             "column": 13
           }
         },
@@ -81,44 +81,44 @@
           "corrected": false,
           "correctable": true,
           "location": {
-            "start_line": 6,
-            "start_column": 13,
-            "last_line": 6,
-            "last_column": 25,
-            "length": 13,
-            "line": 6,
-            "column": 13
-          }
-        },
-        {
-          "severity": "convention",
-          "message": "`Hash<Key, Value>` is the documented hash specific syntax",
-          "cop_name": "YARD/CollectionType",
-          "corrected": false,
-          "correctable": true,
-          "location": {
-            "start_line": 7,
-            "start_column": 13,
-            "last_line": 7,
-            "last_column": 33,
-            "length": 21,
-            "line": 7,
-            "column": 13
-          }
-        },
-        {
-          "severity": "convention",
-          "message": "`Hash<Key, Value>` is the documented hash specific syntax",
-          "cop_name": "YARD/CollectionType",
-          "corrected": false,
-          "correctable": true,
-          "location": {
             "start_line": 8,
             "start_column": 13,
             "last_line": 8,
+            "last_column": 25,
+            "length": 13,
+            "line": 8,
+            "column": 13
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`Hash<Key, Value>` is the documented hash specific syntax",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 9,
+            "start_column": 13,
+            "last_line": 9,
+            "last_column": 33,
+            "length": 21,
+            "line": 9,
+            "column": 13
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`Hash<Key, Value>` is the documented hash specific syntax",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 10,
+            "start_column": 13,
+            "last_line": 10,
             "last_column": 53,
             "length": 41,
-            "line": 8,
+            "line": 10,
             "column": 13
           }
         }
