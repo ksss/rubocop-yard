@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.5.0] - 2023-10-9
+
+- Add new cop `YARD/CollectionStyle`
+
 - Split cop from `YARD/TagType` to
     - `YARD/TagTypeSyntax`
     - `YARD/CollectionType`
