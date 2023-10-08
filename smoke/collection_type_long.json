@@ -60,17 +60,33 @@
         },
         {
           "severity": "convention",
-          "message": "`Array<{Symbol => <Integer>}>` is using short style syntax",
+          "message": "`<<<Symbol>>>` is using short style syntax",
           "cop_name": "YARD/CollectionType",
           "corrected": false,
           "correctable": true,
           "location": {
-            "start_line": 8,
+            "start_line": 7,
             "start_column": 3,
-            "last_line": 8,
-            "last_column": 41,
-            "length": 39,
-            "line": 8,
+            "last_line": 7,
+            "last_column": 25,
+            "length": 23,
+            "line": 7,
+            "column": 3
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`Array<{Symbol => <Integer>, List<Integer>}>` is using short style syntax",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 11,
+            "start_column": 3,
+            "last_line": 11,
+            "last_column": 56,
+            "length": 54,
+            "line": 11,
             "column": 3
           }
         }
@@ -78,7 +94,7 @@
     }
   ],
   "summary": {
-    "offense_count": 4,
+    "offense_count": 5,
     "target_file_count": 1,
     "inspected_file_count": 1
   }

@@ -25,7 +25,7 @@ namespace :smoke do
       { name: "mismatch_name" }
     ],
     'YARD/CollectionType' => [
-      { name: "collection_type" },
+      { name: "collection_type", correct: true },
       { name: "collection_type", style: "long" },
       { name: "collection_type", style: "short" },
     ],
@@ -37,6 +37,7 @@ namespace :smoke do
   desc "Run testing for smoke files"
   task test: [:start_server] do
     require 'json'
+
     each_config do |cop, content, rb_path, json_path, cmd|
       puts "Running #{rb_path} and #{json_path}"
       actual = `#{cmd} #{rb_path}`
@@ -56,10 +57,18 @@ namespace :smoke do
 
   desc "Regenerate smoke files"
   task regenerate: [:start_server] do
+    require 'tempfile'
+
     each_config do |cop, content, rb_path, json_path, cmd|
       rm json_path rescue nil
       puts "Generate #{json_path}"
-      system("#{cmd} #{rb_path} | jq > #{json_path}")
+      if content[:correct]
+        correct_path = "smoke/#{content[:name]}_correct.rb"
+        IO.copy_stream(rb_path, correct_path)
+        puts File.read(correct_path)
+        sh("#{cmd} --debug --autocorrect #{correct_path}")
+      end
+      sh("#{cmd} #{rb_path} | jq > #{json_path}")
     end
   end
 

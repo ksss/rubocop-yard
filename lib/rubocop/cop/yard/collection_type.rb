@@ -84,10 +84,10 @@ module RuboCop
 
         def check_style(comment, docstring)
           each_types_explainer(docstring) do |type, types_explainer|
-            offenced_type = types_explainer.to_s_by_style(style)
-            unless type == offenced_type
+            correct_type = styled_string(types_explainer)
+            unless type == correct_type
               add_offense(comment, message: "`#{type}` is using #{bad_style} style syntax") do |corrector|
-                corrector.replace(comment, comment.source.sub(/\[(.*)\]/) { "[#{offenced_type}]" })
+                corrector.replace(comment, comment.source.sub(/\[(.*)\]/) { "[#{correct_type}]" })
               end
             end
           end
@@ -102,10 +102,11 @@ module RuboCop
         def check_mismatch_collection_type_one(comment, types_explainer)
           case types_explainer
           when ::YARD::Tags::TypesExplainer::HashCollectionType
-            if types_explainer.name == 'Hash'
+            case types_explainer.name
+            when 'Hash'
               types_explainer.key_types.each { |t| check_mismatch_collection_type_one(comment, t) }
               types_explainer.value_types.each { |t| check_mismatch_collection_type_one(comment, t) }
-            else
+            when 'Array'
               message = "`{KeyType => ValueType}` is the Hash collection type syntax."
               add_offense(tag_range_for_comment(comment), message: message) do |corrector|
                 types_explainer.name = "Hash"
@@ -113,19 +114,10 @@ module RuboCop
               end
             end
           when ::YARD::Tags::TypesExplainer::FixedCollectionType
-            if types_explainer.name == 'Hash'
-              message = "`(Type)` is the fixed collection type syntax."
-              add_offense(tag_range_for_comment(comment), message: message) do |corrector|
-                types_explainer.name = "Array"
-                correct_tag_type(corrector, comment, types_explainer)
-              end
-            else
-              types_explainer.types.each { |t| check_mismatch_collection_type_one(comment, t) }
-            end
-          when ::YARD::Tags::TypesExplainer::CollectionType
-            if types_explainer.name == 'Hash'
-              message = "`<Type>` is the collection type syntax."
+            case types_explainer.name
+            when 'Hash'
               if types_explainer.types.length == 2
+                message = "`Hash(Key, Value)` is miswritten of `Hash<Key, Value>` in perhaps"
                 add_offense(tag_range_for_comment(comment), message: message) do |corrector|
                   hash_type = ::YARD::Tags::TypesExplainer::HashCollectionType.new(
                     'Hash',
@@ -135,9 +127,37 @@ module RuboCop
                   correct_tag_type(corrector, comment, hash_type)
                 end
               else
-                add_offense(tag_range_for_comment(comment), message: message)
+                message = "`(Type)` is the fixed collection type syntax."
+                add_offense(tag_range_for_comment(comment), message: message) do |corrector|
+                  types_explainer.name = "Array"
+                  correct_tag_type(corrector, comment, types_explainer)
+                end
               end
-            else
+            when 'Array'
+              types_explainer.types.each { |t| check_mismatch_collection_type_one(comment, t) }
+            end
+          when ::YARD::Tags::TypesExplainer::CollectionType
+            case types_explainer.name
+            when 'Hash'
+              if types_explainer.types.length == 2
+                # `Hash<Key, Value>` pattern is the documented hash specific syntax.
+                message = "`Hash<Key, Value>` is the documented hash specific syntax"
+                add_offense(tag_range_for_comment(comment), message: message) do |corrector|
+                  hash_type = ::YARD::Tags::TypesExplainer::HashCollectionType.new(
+                    'Hash',
+                    [types_explainer.types[0]],
+                    [types_explainer.types[1]]
+                  )
+                  correct_tag_type(corrector, comment, hash_type)
+                end
+              else
+                message = "`<Type>` is the collection type syntax."
+                add_offense(tag_range_for_comment(comment), message: message) do |corrector|
+                  types_explainer.name = "Array"
+                  correct_tag_type(corrector, comment, types_explainer)
+                end
+              end
+            when 'Array'
               types_explainer.types.each { |t| check_mismatch_collection_type_one(comment, t) }
             end
           end
@@ -152,7 +172,7 @@ module RuboCop
         end
 
         def correct_tag_type(corrector, comment, types_explainer)
-          corrector.replace(comment, comment.source.sub(/\[(.*)\]/) { "[#{types_explainer.to_s_by_style(style)}]" })
+          corrector.replace(comment, comment.source.sub(/\[(.*)\]/) { "[#{styled_string(types_explainer)}]" })
         end
 
         def each_types_explainer(docstring, &block)
@@ -166,6 +186,45 @@ module RuboCop
               end
             rescue SyntaxError
             end
+          end
+        end
+
+        def styled_string(types_explainer)
+          case types_explainer
+          when ::YARD::Tags::TypesExplainer::HashCollectionType
+            tname = case [style, types_explainer.name]
+            when [:short, 'Hash']
+              ''
+            when [:long, 'Hash']
+              'Hash'
+            else
+              types_explainer.name
+            end
+            "#{tname}{#{types_explainer.key_types.map { styled_string(_1) }.join(', ')} => #{types_explainer.value_types.map { styled_string(_1) }.join(', ')}}"
+          when ::YARD::Tags::TypesExplainer::FixedCollectionType
+            tname = case [style, types_explainer.name]
+            when [:short, 'Array']
+              ''
+            when [:long, 'Array']
+              'Array'
+            else
+              types_explainer.name
+            end
+            "#{tname}(#{types_explainer.types.map { styled_string(_1) }.join(', ')})"
+          when ::YARD::Tags::TypesExplainer::CollectionType
+            tname = case [style, types_explainer.name]
+            when [:short, 'Array']
+              ''
+            when [:long, 'Array']
+              'Array'
+            else
+              types_explainer.name
+            end
+            "#{tname}<#{types_explainer.types.map { styled_string(_1) }.join(', ')}>"
+          when ::YARD::Tags::TypesExplainer::Type
+            types_explainer.name
+          else
+            raise "#{types_explainer.class} is not supported"
           end
         end
 
