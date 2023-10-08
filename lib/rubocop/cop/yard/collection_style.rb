@@ -3,7 +3,7 @@
 module RuboCop
   module Cop
     module YARD
-      # @example EnforcedStyle short (default)
+      # @example EnforcedStyle short
       #
       #   # bad
       #   # @param [Hash{KeyType => ValueType}]
@@ -23,7 +23,7 @@ module RuboCop
       #   # good
       #   # @param [<String>]
       #
-      # @example EnforcedStyle long
+      # @example EnforcedStyle long (default)
       #   # bad
       #   # @param [{KeyType => ValueType}]
       #

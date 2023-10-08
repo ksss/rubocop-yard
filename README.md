@@ -12,7 +12,53 @@ Check tag type syntax error.
 
 ```
 # @param [Symbol|String]
-          ^^^^^^^^^^^^^ SyntaxError as YARD tag type
+          ^^^^^^^^^^^^^ (SyntaxError) invalid character at |
+```
+
+### `YARD/CollectionStyle`
+
+`EnforcedStyle long (default)`
+
+```
+# bad
+# @param [{KeyType => ValueType}]
+
+# bad
+# @param [(String)]
+
+# bad
+# @param [<String>]
+
+# good
+# @param [Hash{KeyType => ValueType}]
+
+# good
+# @param [Array(String)]
+
+# good
+# @param [Array<String>]
+```
+
+`EnforcedStyle short`
+
+```
+# bad
+# @param [Hash{KeyType => ValueType}]
+
+# bad
+# @param [Array(String)]
+
+# bad
+# @param [Array<String>]
+
+# good
+# @param [{KeyType => ValueType}]
+
+# good
+# @param [(String)]
+
+# good
+# @param [<String>]
 ```
 
 ### `YARD/CollectionType`
@@ -27,6 +73,12 @@ Check tag type syntax error.
 Check `@param` and `@option` name with method definition.
 
 ```rb
+# @param [String]
+^^^^^^^^^^^^^^^^^ No tag name is supplied in `@param`
+
+# @param string
+^^^^^^^^^^^^^^^ No types are associated with the tag in `@param`
+
 # @param [String] string
                   ^^^^^^ `string` is not found in method arguments
 # @option opt bar [String]
