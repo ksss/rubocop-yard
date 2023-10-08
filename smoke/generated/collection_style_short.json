@@ -1,0 +1,85 @@
+{
+  "metadata": {
+    "rubocop_version": "1.56.2",
+    "ruby_engine": "ruby",
+    "ruby_version": "3.2.2",
+    "ruby_patchlevel": "53",
+    "ruby_platform": "arm64-darwin22"
+  },
+  "files": [
+    {
+      "path": "smoke/collection_style_short.rb",
+      "offenses": [
+        {
+          "severity": "convention",
+          "message": "`Array(Symbol)` is using long style syntax",
+          "cop_name": "YARD/CollectionStyle",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 5,
+            "start_column": 3,
+            "last_line": 5,
+            "last_column": 26,
+            "length": 24,
+            "line": 5,
+            "column": 3
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`Array<Symbol>` is using long style syntax",
+          "cop_name": "YARD/CollectionStyle",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 6,
+            "start_column": 3,
+            "last_line": 6,
+            "last_column": 26,
+            "length": 24,
+            "line": 6,
+            "column": 3
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`Hash{Symbol => String}` is using long style syntax",
+          "cop_name": "YARD/CollectionStyle",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 8,
+            "start_column": 3,
+            "last_line": 8,
+            "last_column": 35,
+            "length": 33,
+            "line": 8,
+            "column": 3
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`Array<{Symbol => <Integer>, List<Integer>}>` is using long style syntax",
+          "cop_name": "YARD/CollectionStyle",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 11,
+            "start_column": 3,
+            "last_line": 11,
+            "last_column": 56,
+            "length": 54,
+            "line": 11,
+            "column": 3
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "offense_count": 4,
+    "target_file_count": 1,
+    "inspected_file_count": 1
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "metadata": {
+    "rubocop_version": "1.56.2",
+    "ruby_engine": "ruby",
+    "ruby_version": "3.2.2",
+    "ruby_patchlevel": "53",
+    "ruby_platform": "arm64-darwin22"
+  },
+  "files": [
+    {
+      "path": "smoke/collection_type_short.rb",
+      "offenses": [
+        {
+          "severity": "convention",
+          "message": "`(Type)` is the fixed collection type syntax.",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 2,
+            "start_column": 13,
+            "last_line": 2,
+            "last_column": 25,
+            "length": 13,
+            "line": 2,
+            "column": 13
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`{KeyType => ValueType}` is the Hash collection type syntax.",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 4,
+            "start_column": 13,
+            "last_line": 4,
+            "last_column": 36,
+            "length": 24,
+            "line": 4,
+            "column": 13
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`(Type)` is the fixed collection type syntax.",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 5,
+            "start_column": 13,
+            "last_line": 5,
+            "last_column": 25,
+            "length": 13,
+            "line": 5,
+            "column": 13
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`Hash(Key, Value)` is miswritten of `Hash<Key, Value>` in perhaps",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 6,
+            "start_column": 13,
+            "last_line": 6,
+            "last_column": 33,
+            "length": 21,
+            "line": 6,
+            "column": 13
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`<Type>` is the collection type syntax.",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 8,
+            "start_column": 13,
+            "last_line": 8,
+            "last_column": 25,
+            "length": 13,
+            "line": 8,
+            "column": 13
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`Hash<Key, Value>` is the documented hash specific syntax",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 9,
+            "start_column": 13,
+            "last_line": 9,
+            "last_column": 33,
+            "length": 21,
+            "line": 9,
+            "column": 13
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`Hash<Key, Value>` is the documented hash specific syntax",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 10,
+            "start_column": 13,
+            "last_line": 10,
+            "last_column": 53,
+            "length": 41,
+            "line": 10,
+            "column": 13
+          }
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "offense_count": 7,
+    "target_file_count": 1,
+    "inspected_file_count": 1
+  }
+}
