@@ -1,7 +1,7 @@
 inherit_from: .rubocop_todo.yml
 
 require:
-  './lib/rubocop/cop/yard_cops'
+  './lib/rubocop-yard'
 
 Layout:
   Enabled: false

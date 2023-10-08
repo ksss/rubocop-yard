@@ -12,10 +12,10 @@ YARD/CollectionType:
   Description: 'Check collection type syntax'
   Enabled: true
   VersionAdded: '0.5.0'
-  # EnforcedStyle: long
-  # SupportedStyles:
-  #   - long
-  #   - short
+  EnforcedStyle: long
+  SupportedStyles:
+    - long
+    - short
 
 YARD/MismatchName:
   Description: 'Check @param and @option name and method parameters'

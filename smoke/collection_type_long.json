@@ -8,61 +8,77 @@
   },
   "files": [
     {
-      "path": "smoke/collection_type.rb",
+      "path": "smoke/collection_type_long.rb",
       "offenses": [
         {
           "severity": "convention",
-          "message": "`(Type)` is the fixed collection type syntax.",
+          "message": "`(Symbol)` is using short style syntax",
           "cop_name": "YARD/CollectionType",
           "corrected": false,
           "correctable": true,
           "location": {
             "start_line": 2,
-            "start_column": 13,
+            "start_column": 3,
             "last_line": 2,
-            "last_column": 25,
-            "length": 13,
+            "last_column": 21,
+            "length": 19,
             "line": 2,
-            "column": 13
+            "column": 3
           }
         },
         {
           "severity": "convention",
-          "message": "`{KeyType => ValueType}` is the Hash collection type syntax.",
+          "message": "`<Symbol>` is using short style syntax",
           "cop_name": "YARD/CollectionType",
           "corrected": false,
           "correctable": true,
           "location": {
             "start_line": 3,
-            "start_column": 13,
+            "start_column": 3,
             "last_line": 3,
-            "last_column": 36,
-            "length": 24,
+            "last_column": 21,
+            "length": 19,
             "line": 3,
-            "column": 13
+            "column": 3
           }
         },
         {
           "severity": "convention",
-          "message": "`<Type>` is the collection type syntax.",
+          "message": "`{Symbol => String}` is using short style syntax",
           "cop_name": "YARD/CollectionType",
           "corrected": false,
           "correctable": true,
           "location": {
             "start_line": 4,
-            "start_column": 14,
+            "start_column": 3,
             "last_line": 4,
-            "last_column": 34,
-            "length": 21,
+            "last_column": 31,
+            "length": 29,
             "line": 4,
-            "column": 14
+            "column": 3
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "`Array<{Symbol => <Integer>}>` is using short style syntax",
+          "cop_name": "YARD/CollectionType",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 8,
+            "start_column": 3,
+            "last_line": 8,
+            "last_column": 41,
+            "length": 39,
+            "line": 8,
+            "column": 3
           }
         }
       ]
     }
   ],
   "summary": {
-    "offense_count": 3,
+    "offense_count": 4,
     "target_file_count": 1,
     "inspected_file_count": 1
   }
