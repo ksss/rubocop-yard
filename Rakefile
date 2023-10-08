@@ -25,12 +25,12 @@ namespace :smoke do
       { name: "mismatch_name" }
     ],
     'YARD/CollectionStyle' => [
-      { name: "collection_style", style: "long" },
-      { name: "collection_style", style: "short" },
+      { name: "collection_style", style: "long", correct: true },
+      { name: "collection_style", style: "short", correct: true },
     ],
     'YARD/CollectionType' => [
-      { name: "collection_type", style: "long" },
-      { name: "collection_type", style: "short" },
+      { name: "collection_type", style: "long", correct: true },
+      { name: "collection_type", style: "short", correct: true },
     ],
   }
   task :start_server do
@@ -66,10 +66,9 @@ namespace :smoke do
       rm json_path rescue nil
       puts "Generate #{json_path}"
       if content[:correct]
-        correct_path = "smoke/#{content[:name]}_correct.rb"
+        correct_path = "#{rb_path.gsub('.rb', '')}_correct.rb"
         IO.copy_stream(rb_path, correct_path)
-        puts File.read(correct_path)
-        sh("#{cmd} --debug --autocorrect #{correct_path}")
+        sh("#{cmd} --autocorrect #{correct_path}")
       end
       sh("#{cmd} #{rb_path} | jq > #{json_path}")
     end
