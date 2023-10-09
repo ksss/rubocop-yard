@@ -28,6 +28,7 @@ module RuboCop
 
           yard_docstring = preceding_lines.map { |line| line.text.gsub(/\A#\s*/, '') }.join("\n")
           docstring = ::YARD::DocstringParser.new.parse(yard_docstring)
+          return false if include_overload_tag?(docstring)
           docstring.tags.each_with_index do |tag, i|
             next unless tag.tag_name == 'param' || tag.tag_name == 'option'
 
@@ -68,6 +69,10 @@ module RuboCop
           offense_end = offense_start + tag.name.length - 1
           range = source_range(processed_source.buffer, comment.location.line, offense_start..offense_end)
           add_offense(range, message: "`#{tag.name}` is not found in method arguments")
+        end
+
+        def include_overload_tag?(docstring)
+          docstring.tags.any? { |tag| tag.tag_name == "overload" }
         end
       end
     end
