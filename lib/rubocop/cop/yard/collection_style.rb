@@ -62,12 +62,16 @@ module RuboCop
           docstring = ::YARD::DocstringParser.new.parse(comment.text.gsub(/\A#\s*/, ''))
           each_types_explainer(docstring) do |type, types_explainer|
             correct_type = styled_string(types_explainer)
-            unless type == correct_type
+            unless ignore_whitespace(type) == ignore_whitespace(correct_type)
               add_offense(comment, message: "`#{type}` is using #{bad_style} style syntax") do |corrector|
                 corrector.replace(comment, comment.source.sub(/\[(.*)\]/) { "[#{correct_type}]" })
               end
             end
           end
+        end
+
+        def ignore_whitespace(str)
+          str.tr(' ', '')
         end
 
         def bad_style

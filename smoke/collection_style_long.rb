@@ -7,7 +7,7 @@ class Foo
   # @param [<<<Symbol>>>]
   # @param [Hash{Symbol => String}]
   # @param [Range<Integer>]
-  # @param [Dict{Symbol => String}]
+  # @param [Dict{Symbol=>String}]
   # @param [Array<{Symbol => <Integer>, List<Integer>}>]
   def foo
   end
