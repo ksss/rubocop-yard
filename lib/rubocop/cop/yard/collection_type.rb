@@ -22,7 +22,7 @@ module RuboCop
       #   # good
       #   # @param [Hash{Symbol => String}]
       class CollectionType < Base
-        include YARD::CollectionHelper
+        include YARD::Helper
         include RangeHelp
         include ConfigurableEnforcedStyle
         extend AutoCorrector

@@ -3,7 +3,7 @@
 module RuboCop
   module Cop
     module YARD
-      module CollectionHelper
+      module Helper
         def extract_tag_types(tag)
           case tag
           when ::YARD::Tags::OptionTag

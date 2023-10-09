@@ -42,7 +42,7 @@ module RuboCop
       #   # good
       #   # @param [Array<String>]
       class CollectionStyle < Base
-        include YARD::CollectionHelper
+        include YARD::Helper
         include RangeHelp
         include ConfigurableEnforcedStyle
         extend AutoCorrector
