@@ -57,12 +57,60 @@
             "line": 5,
             "column": 3
           }
+        },
+        {
+          "severity": "convention",
+          "message": "`opt` is not found in method arguments",
+          "cop_name": "YARD/MismatchName",
+          "corrected": false,
+          "correctable": false,
+          "location": {
+            "start_line": 6,
+            "start_column": 13,
+            "last_line": 6,
+            "last_column": 15,
+            "length": 3,
+            "line": 6,
+            "column": 13
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "No types are associated with the tag in `@option`",
+          "cop_name": "YARD/MismatchName",
+          "corrected": false,
+          "correctable": false,
+          "location": {
+            "start_line": 7,
+            "start_column": 3,
+            "last_line": 7,
+            "last_column": 20,
+            "length": 18,
+            "line": 7,
+            "column": 3
+          }
+        },
+        {
+          "severity": "convention",
+          "message": "No tag name is supplied in `@param`",
+          "cop_name": "YARD/MismatchName",
+          "corrected": false,
+          "correctable": false,
+          "location": {
+            "start_line": 9,
+            "start_column": 3,
+            "last_line": 9,
+            "last_column": 17,
+            "length": 15,
+            "line": 9,
+            "column": 3
+          }
         }
       ]
     }
   ],
   "summary": {
-    "offense_count": 3,
+    "offense_count": 6,
     "target_file_count": 1,
     "inspected_file_count": 1
   }

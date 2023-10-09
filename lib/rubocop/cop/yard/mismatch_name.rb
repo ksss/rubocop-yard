@@ -31,31 +31,37 @@ module RuboCop
           docstring = ::YARD::DocstringParser.new.parse(yard_docstring)
           return false if include_overload_tag?(docstring)
 
-          docstring.tags.each_with_index do |tag, i|
-            next unless tag.tag_name == 'param' || tag.tag_name == 'option'
+          each_tags_by_docstring(['param', 'option'], docstring) do |tags|
+            tags.each_with_index do |tag, i|
+              comment = find_by_tag(preceding_lines, tag, i)
+              next unless comment
 
-            comment = find_by_tag(preceding_lines, tag, i)
-            next unless comment
+              types = extract_tag_types(tag)
+              unless tag.name && types
+                if tag.name.nil?
+                  add_offense(comment, message: "No tag name is supplied in `@#{tag.tag_name}`")
+                elsif types.nil?
+                  add_offense(comment, message: "No types are associated with the tag in `@#{tag.tag_name}`")
+                end
 
-            types = extract_tag_types(tag)
-            unless tag.name && types
-              if tag.name.nil?
-                add_offense(comment, message: "No tag name is supplied in `@#{tag.tag_name}`")
-              elsif types.nil?
-                add_offense(comment, message: "No types are associated with the tag in `@#{tag.tag_name}`")
+                next
               end
 
-              next
+              next unless node.arguments.none? { |arg_node| tag.name.to_sym == arg_node.name }
+
+              add_offense_to_tag(comment, tag)
             end
-
-            next unless node.arguments.none? { |arg_node| tag.name.to_sym == arg_node.name }
-
-            add_offense_to_tag(comment, tag)
           end
         end
         alias on_defs on_def
 
         private
+
+        def each_tags_by_docstring(tag_names, docstring)
+          tag_names.each do |tag_name|
+            yield docstring.tags.select { |tag| tag.tag_name == tag_name }
+          end
+        end
 
         def find_by_tag(preceding_lines, tag, i)
           count = -1
