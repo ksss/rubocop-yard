@@ -17,6 +17,7 @@ module RuboCop
       #   def foo(bar, opts = {}, *arg)
       #   end
       class MismatchName < Base
+        include YARD::Helper
         include RangeHelp
         include DocumentationComment
 
@@ -29,16 +30,18 @@ module RuboCop
           yard_docstring = preceding_lines.map { |line| line.text.gsub(/\A#\s*/, '') }.join("\n")
           docstring = ::YARD::DocstringParser.new.parse(yard_docstring)
           return false if include_overload_tag?(docstring)
+
           docstring.tags.each_with_index do |tag, i|
             next unless tag.tag_name == 'param' || tag.tag_name == 'option'
 
             comment = find_by_tag(preceding_lines, tag, i)
             next unless comment
 
-            unless tag.name && tag.types
+            types = extract_tag_types(tag)
+            unless tag.name && types
               if tag.name.nil?
                 add_offense(comment, message: "No tag name is supplied in `@#{tag.tag_name}`")
-              elsif tag.types.nil?
+              elsif types.nil?
                 add_offense(comment, message: "No types are associated with the tag in `@#{tag.tag_name}`")
               end
 
