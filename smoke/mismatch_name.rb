@@ -7,6 +7,7 @@ class Foo
   # @option opts aaa
   # @option opts aaa [void]
   # @param [void]
+  # @param (see #route_docs)
   # @return [void]
   # @return [void] fooo
   def foo(bar, opts = {})

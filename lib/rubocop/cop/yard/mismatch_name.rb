@@ -36,6 +36,9 @@ module RuboCop
               comment = find_by_tag(preceding_lines, tag, i)
               next unless comment
 
+              # YARD::Tags::RefTagList is not has name and types
+              next if tag.instance_of?(::YARD::Tags::RefTagList)
+
               types = extract_tag_types(tag)
               unless tag.name && types
                 if tag.name.nil?
