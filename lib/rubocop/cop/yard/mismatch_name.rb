@@ -52,6 +52,12 @@ module RuboCop
 
               next unless node.arguments.none? { |arg_node| tag.name.to_sym == arg_node.name }
 
+              begin
+                parse_type(types.join(', '))
+              rescue SyntaxError
+                next
+              end
+
               add_offense_to_tag(comment, tag)
             end
           end
