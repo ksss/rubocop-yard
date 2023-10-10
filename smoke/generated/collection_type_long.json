@@ -92,7 +92,7 @@
         },
         {
           "severity": "convention",
-          "message": "`Hash<Key, Value>` is the documented hash specific syntax",
+          "message": "`Hash<Key, Value>` is ambiguous syntax",
           "cop_name": "YARD/CollectionType",
           "corrected": false,
           "correctable": true,
@@ -108,7 +108,7 @@
         },
         {
           "severity": "convention",
-          "message": "`Hash<Key, Value>` is the documented hash specific syntax",
+          "message": "`Hash<Key, Value>` is ambiguous syntax",
           "cop_name": "YARD/CollectionType",
           "corrected": false,
           "correctable": true,

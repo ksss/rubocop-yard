@@ -22,7 +22,7 @@ module RuboCop
       #   # good
       #   # @param [Hash{Symbol => String}]
       class CollectionType < Base
-        include YARD::CollectionHelper
+        include YARD::Helper
         include RangeHelp
         include ConfigurableEnforcedStyle
         extend AutoCorrector
@@ -86,8 +86,7 @@ module RuboCop
             case types_explainer.name
             when 'Hash'
               if types_explainer.types.length == 2
-                # `Hash<Key, Value>` pattern is the documented hash specific syntax.
-                message = "`Hash<Key, Value>` is the documented hash specific syntax"
+                message = "`Hash<Key, Value>` is ambiguous syntax"
                 add_offense(tag_range_for_comment(comment), message: message) do |corrector|
                   hash_type = ::YARD::Tags::TypesExplainer::HashCollectionType.new(
                     'Hash',
