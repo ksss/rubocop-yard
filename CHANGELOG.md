@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+## [0.6.0] - 2023-10-10
+
 - Split cop from `YARD/TagType` to
     - `YARD/TagTypeSyntax`
     - `YARD/CollectionType`
