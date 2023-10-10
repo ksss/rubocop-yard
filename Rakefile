@@ -40,6 +40,7 @@ namespace :smoke do
   desc "Run testing for smoke files"
   task test: [:start_server] do
     require 'json'
+    errors = []
 
     each_config do |cop, content, with_style_name, rb_path, json_path, cmd|
       puts "Running #{rb_path} and #{json_path}"
@@ -53,7 +54,7 @@ namespace :smoke do
         pp actual_out
         puts '---expect---'
         pp expect_out
-        raise "change output `rubocop #{rb_path}` with #{json_path}"
+        errors << "Change output `rubocop #{rb_path}` with #{json_path}"
       end
 
       if content[:correct]
@@ -61,9 +62,16 @@ namespace :smoke do
         puts "Running #{corrected_path}"
         actual = `#{cmd} #{corrected_path}`
         unless JSON.parse(actual)["summary"]["offense_count"] == 0
-          raise "unexpected autocorrected output #{corrected_path}"
+          errors << "Unexpected autocorrected output #{corrected_path}"
         end
       end
+    end
+
+    unless errors.empty?
+      errors.each do |error|
+        $stderr.puts error
+      end
+      raise
     end
   end
 

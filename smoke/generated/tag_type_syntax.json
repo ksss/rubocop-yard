@@ -41,12 +41,28 @@
             "line": 3,
             "column": 22
           }
+        },
+        {
+          "severity": "convention",
+          "message": "(SyntaxError) expecting END, got name 'Object'",
+          "cop_name": "YARD/TagTypeSyntax",
+          "corrected": false,
+          "correctable": false,
+          "location": {
+            "start_line": 4,
+            "start_column": 13,
+            "last_line": 4,
+            "last_column": 32,
+            "length": 20,
+            "line": 4,
+            "column": 13
+          }
         }
       ]
     }
   ],
   "summary": {
-    "offense_count": 2,
+    "offense_count": 3,
     "target_file_count": 1,
     "inspected_file_count": 1
   }
