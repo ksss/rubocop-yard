@@ -10,6 +10,7 @@ module RuboCop
       #   # good
       #   # @param [Integer, String]
       class TagTypeSyntax < Base
+        include YARD::Helper
         include RangeHelp
 
         def on_new_investigation
@@ -26,10 +27,10 @@ module RuboCop
         def check(comment)
           docstring = comment.text.gsub(/\A#\s*/, '')
           ::YARD::DocstringParser.new.parse(docstring).tags.each do |tag|
-            types = extract_tag_type(tag)
+            types = extract_tag_types(tag)
 
             check_syntax_error(comment) do
-              ::YARD::Tags::TypesExplainer::Parser.parse(types.join(', '))
+              parse_type(types.join(', '))
             end
           end
         end
@@ -39,15 +40,6 @@ module RuboCop
             yield
           rescue SyntaxError => e
             add_offense(tag_range_for_comment(comment), message: "(#{e.class}) #{e.message}")
-          end
-        end
-
-        def extract_tag_type(tag)
-          case tag
-          when ::YARD::Tags::OptionTag
-            tag.pair.types
-          else
-            tag.types
           end
         end
 

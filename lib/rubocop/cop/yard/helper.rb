@@ -13,12 +13,16 @@ module RuboCop
           end
         end
 
+        def parse_type(type)
+          ::YARD::Tags::TypesExplainer::Parser.parse(type)
+        end
+
         def each_types_explainer(docstring, &block)
           docstring.tags.each do |tag|
             types = extract_tag_types(tag)
 
             begin
-              types_explainers = ::YARD::Tags::TypesExplainer::Parser.parse(types.join(', '))
+              types_explainers = parse_type(types.join(', '))
               types.zip(types_explainers).each do |type, types_explainer|
                 block.call(type, types_explainer)
               end
