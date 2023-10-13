@@ -28,7 +28,12 @@ module RuboCop
           return false unless preceding_comment?(node, preceding_lines.last)
 
           yard_docstring = preceding_lines.map { |line| line.text.gsub(/\A#\s*/, '') }.join("\n")
-          docstring = ::YARD::DocstringParser.new.parse(yard_docstring)
+          docstring = begin
+            ::YARD::DocstringParser.new.parse(yard_docstring)
+          rescue
+            return false
+          end
+
           return false if include_overload_tag?(docstring)
 
           each_tags_by_docstring(['param', 'option'], docstring) do |tags|
