@@ -70,7 +70,7 @@ module RuboCop
 
           # Documentation only or just `@return` is a common form of documentation.
           # The subsequent features will be limited to cases where both `@param` and `@option` are present.
-          unless docstring.tags.find { |tag| tag.tag_name == 'param' || tag.tag_name == 'option' }
+          unless docstring.tags.find { |tag| (tag.tag_name == 'param' && !tag.instance_of?(::YARD::Tags::RefTagList)) || tag.tag_name == 'option' }
             return false
           end
           node.arguments.each do |argument|

@@ -30,6 +30,10 @@ class Foo
   def doc_only(arg)
   end
 
+  # @param (see #other)
+  def ref_only(arg)
+  end
+
   def empty_doc(arg)
   end
 end
