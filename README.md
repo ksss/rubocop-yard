@@ -86,6 +86,14 @@ Check `@param` and `@option` name with method definition.
 def foo(strings, opts = {})
 ```
 
+Check undocumented argument.
+
+```
+# @param [String] strings
+^^^^^^^^^^^^^^^^^^^^^^^^^ This method has argument `opts`, But not documented
+def foo(strings, opts = {})
+```
+
 ### `YARD/MeaninglessTag`
 
 Check `@param` and `@option` with class/module or casgn

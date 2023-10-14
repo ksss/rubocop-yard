@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.7.0] - 2023-10-14
+
+- New feature
+    - `YARD/MismatchName`: Check undocumented argument.
+
 ## [0.6.0] - 2023-10-10
 
 - Split cop from `YARD/TagType` to
