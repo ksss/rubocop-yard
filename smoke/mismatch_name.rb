@@ -13,4 +13,11 @@ class Foo
   # @return [void] fooo
   def foo(bar, opts = {})
   end
+
+  # @param [String] strings
+  def bar(strings, opts = {}, a = nil, *rest, **kw)
+  end
+
+  def empty_doc(arg)
+  end
 end
