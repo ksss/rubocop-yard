@@ -22,6 +22,14 @@ class Foo
   def bar(strings, opts = {}, a = nil, *rest, **kw)
   end
 
+  # @return [void]
+  def return_only(arg)
+  end
+
+  # this is a doc
+  def doc_only(arg)
+  end
+
   def empty_doc(arg)
   end
 end
