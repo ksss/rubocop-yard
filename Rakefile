@@ -22,7 +22,7 @@ namespace :smoke do
       { name: "meaningless_tag" }
     ],
     'YARD/MismatchName' => [
-      { name: "mismatch_name" }
+      { name: "mismatch_name", correct: true }
     ],
     'YARD/CollectionStyle' => [
       { name: "collection_style", style: "long", correct: true },
@@ -60,10 +60,8 @@ namespace :smoke do
       if content[:correct]
         corrected_path = "smoke/generated/#{with_style_name}_correct.rb"
         puts "Running #{corrected_path}"
-        actual = `#{cmd} #{corrected_path}`
-        unless JSON.parse(actual)["summary"]["offense_count"] == 0
-          errors << "Unexpected autocorrected output #{corrected_path}"
-        end
+        system("#{cmd} --autocorrect #{corrected_path}")
+        sh("git diff --exit-code #{corrected_path}")
       end
     end
 
@@ -85,7 +83,7 @@ namespace :smoke do
       if content[:correct]
         correct_path = "smoke/generated/#{with_style_name}_correct.rb"
         IO.copy_stream(rb_path, correct_path)
-        sh("#{cmd} --autocorrect #{correct_path}")
+        system("#{cmd} --autocorrect #{correct_path}")
       end
       sh("#{cmd} #{rb_path} | jq > #{json_path}")
     end

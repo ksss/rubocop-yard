@@ -60,7 +60,7 @@
         },
         {
           "severity": "convention",
-          "message": "`opt` is not found in method arguments",
+          "message": "`opt` is not found in method arguments of [bar, opts]",
           "cop_name": "YARD/MismatchName",
           "corrected": false,
           "correctable": false,
@@ -105,12 +105,28 @@
             "line": 9,
             "column": 3
           }
+        },
+        {
+          "severity": "convention",
+          "message": "This method has argument `opts`, But not documented",
+          "cop_name": "YARD/MismatchName",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 17,
+            "start_column": 3,
+            "last_line": 17,
+            "last_column": 27,
+            "length": 25,
+            "line": 17,
+            "column": 3
+          }
         }
       ]
     }
   ],
   "summary": {
-    "offense_count": 6,
+    "offense_count": 7,
     "target_file_count": 1,
     "inspected_file_count": 1
   }

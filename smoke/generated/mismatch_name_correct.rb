@@ -15,6 +15,10 @@ class Foo
   end
 
   # @param [String] strings
+  # @param [Object] opts
+  # @param [Object] a
+  # @param [Array<Object>] rest
+  # @param [Hash{Symbol => Object}] kw
   def bar(strings, opts = {}, a = nil, *rest, **kw)
   end
 
