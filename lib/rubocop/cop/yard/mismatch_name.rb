@@ -74,10 +74,14 @@ module RuboCop
             return false
           end
           node.arguments.each do |argument|
+            next if argument.type == :blockarg
+            next if argument.name.nil?
+
             found = docstring.tags.find do |tag|
               next unless tag.tag_name == 'param' || tag.tag_name == 'option'
               tag.name&.to_sym == argument.name
             end
+
             unless found
               comment = preceding_lines.last
               return if part_of_ignored_node?(comment)
@@ -126,7 +130,14 @@ module RuboCop
           offense_start = comment.location.column + start_column
           offense_end = offense_start + tag.name.length - 1
           range = source_range(processed_source.buffer, comment.location.line, offense_start..offense_end)
-          add_offense(range, message: "`#{tag.name}` is not found in method arguments of [#{node.arguments.map(&:name).join(', ')}]")
+          argument_names = node.arguments.map(&:name).compact
+          argument_name =
+            if argument_names.empty?
+              ''
+            else
+              " of [#{argument_names.join(', ')}]"
+            end
+          add_offense(range, message: "`#{tag.name}` is not found in method arguments#{argument_name}")
           ignore_node(comment)
         end
 

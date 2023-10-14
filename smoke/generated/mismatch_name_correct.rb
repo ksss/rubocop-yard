@@ -34,6 +34,14 @@ class Foo
   def ref_only(arg)
   end
 
+  # @param [String] arg
+  def rest_block(arg, *, **, &block)
+  end
+
+  # @param [String] arg
+  def delegate(arg, ...)
+  end
+
   def empty_doc(arg)
   end
 end
