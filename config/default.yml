@@ -30,3 +30,8 @@ YARD/MismatchName:
   Description: 'Check @param and @option name and method parameters'
   Enabled: true
   VersionAdded: '0.3.0'
+  EnforcedStylePrototypeName: after
+  SupportedStylesPrototypeName:
+    - before
+    - after
+
