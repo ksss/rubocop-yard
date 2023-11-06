@@ -102,11 +102,34 @@ module RuboCop
         def tag_prototype(argument)
           case argument.type
           when :kwrestarg
-            "@param [Hash{Symbol => Object}] #{argument.name}"
+            case cop_config_prototype_name
+            when "before"
+              "@param #{argument.name} [Hash{Symbol => Object}]"
+            when "after"
+              "@param [Hash{Symbol => Object}] #{argument.name}"
+            end
           when :restarg
-            "@param [Array<Object>] #{argument.name}"
+            case cop_config_prototype_name
+            when "before"
+              "@param #{argument.name} [Array<Object>]"
+            when "after"
+              "@param [Array<Object>] #{argument.name}"
+            end
           else
-            "@param [Object] #{argument.name}"
+            case cop_config_prototype_name
+            when "before"
+              "@param #{argument.name} [Object]"
+            when "after"
+              "@param [Object] #{argument.name}"
+            end
+          end
+        end
+
+        def cop_config_prototype_name
+          @cop_config_prototype_name ||= cop_config["EnforcedStylePrototypeName"].tap do |c|
+            unless cop_config["SupportedStylesPrototypeName"].include?(c)
+              raise "unsupported style #{c}"
+            end
           end
         end
 
