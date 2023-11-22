@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rubocop-yard (0.8.0)
-      rubocop
+      rubocop (~> 1.21)
       yard
 
 GEM
@@ -50,11 +50,11 @@ GEM
     rbs (3.2.1)
     rdoc (6.5.0)
       psych (>= 4.0.0)
-    regexp_parser (2.8.1)
+    regexp_parser (2.8.2)
     reline (0.3.8)
       io-console (~> 0.5)
     rexml (3.2.6)
-    rubocop (1.56.2)
+    rubocop (1.56.4)
       base64 (~> 0.1.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -66,7 +66,7 @@ GEM
       rubocop-ast (>= 1.28.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.29.0)
+    rubocop-ast (1.30.0)
       parser (>= 3.2.1.0)
     ruby-progressbar (1.13.0)
     securerandom (0.2.2)
