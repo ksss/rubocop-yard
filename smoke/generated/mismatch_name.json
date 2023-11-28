@@ -66,12 +66,12 @@
           "correctable": false,
           "location": {
             "start_line": 6,
-            "start_column": 13,
+            "start_column": 12,
             "last_line": 6,
-            "last_column": 15,
+            "last_column": 14,
             "length": 3,
             "line": 6,
-            "column": 13
+            "column": 12
           }
         },
         {
@@ -121,12 +121,28 @@
             "line": 17,
             "column": 3
           }
+        },
+        {
+          "severity": "convention",
+          "message": "`context,` is not found in method arguments of [context]",
+          "cop_name": "YARD/MismatchName",
+          "corrected": false,
+          "correctable": false,
+          "location": {
+            "start_line": 47,
+            "start_column": 18,
+            "last_line": 47,
+            "last_column": 25,
+            "length": 8,
+            "line": 47,
+            "column": 18
+          }
         }
       ]
     }
   ],
   "summary": {
-    "offense_count": 7,
+    "offense_count": 8,
     "target_file_count": 1,
     "inspected_file_count": 1
   }

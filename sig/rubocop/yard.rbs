@@ -5,6 +5,7 @@ module RuboCop
   end
   module Cop
     module YARD
+      type tag = ::YARD::Tags::Tag | ::YARD::Tags::OverloadTag | ::YARD::Tags::OptionTag
       type tag_types = YARD::Tags::TypesExplainer::Type
                      | ::YARD::Tags::TypesExplainer::CollectionType
                      | ::YARD::Tags::TypesExplainer::FixedCollectionType
@@ -14,7 +15,7 @@ module RuboCop
       end
 
       module Helper
-        def extract_tag_types: (::YARD::Tags::OptionTag | ::YARD::Tags::Tag tag) -> Array[String]?
+        def extract_tag_types: (tag tag) -> Array[String]?
       end
 
       class TagTypeSyntax < ::RuboCop::Cop::Base
@@ -31,6 +32,9 @@ module RuboCop
 
       class MismatchName < ::RuboCop::Cop::Base
         include YARD::Helper
+
+        def add_offense_to_tag: (untyped node, ::Parser::Source::Comment comment, ::YARD::Tags::Tag tag) -> void
+        def cop_config_prototype_name: () -> ("before" | "after")
       end
     end
   end

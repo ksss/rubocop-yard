@@ -149,8 +149,8 @@ module RuboCop
         end
 
         def add_offense_to_tag(node, comment, tag)
-          tag_name_regexp = Regexp.new("\\b#{Regexp.escape(tag.name)}\\b")
-          start_column = comment.source.index(tag_name_regexp)
+          tag_name_regexp = Regexp.new("\\s#{Regexp.escape(tag.name)}\\s")
+          start_column = comment.source.index(tag_name_regexp) or return
           offense_start = comment.location.column + start_column
           offense_end = offense_start + tag.name.length - 1
           range = source_range(processed_source.buffer, comment.location.line, offense_start..offense_end)
