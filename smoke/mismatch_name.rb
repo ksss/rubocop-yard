@@ -41,3 +41,10 @@ class Foo
   def empty_doc(arg)
   end
 end
+
+# https://github.com/ksss/rubocop-yard/issues/18
+class Test
+  # @param [Hash] context, Extra colon at the end of param name.
+  def test(context)
+  end
+end

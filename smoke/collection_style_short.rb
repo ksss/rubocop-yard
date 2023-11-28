@@ -12,3 +12,11 @@ class Foo
   def foo
   end
 end
+
+# https://github.com/ksss/rubocop-yard/issues/19
+class Test
+  # @param [Hash{Symbol=>Object}] options The options
+  # @option [Integer] :op Option associated to no param
+  def test(options)
+  end
+end

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "rubocop_version": "1.56.2",
+    "rubocop_version": "1.57.2",
     "ruby_engine": "ruby",
     "ruby_version": "3.2.2",
     "ruby_patchlevel": "53",
@@ -73,12 +73,28 @@
             "line": 11,
             "column": 3
           }
+        },
+        {
+          "severity": "convention",
+          "message": "`Hash{Symbol=>Object}` is using long style syntax",
+          "cop_name": "YARD/CollectionStyle",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 18,
+            "start_column": 3,
+            "last_line": 18,
+            "last_column": 53,
+            "length": 51,
+            "line": 18,
+            "column": 3
+          }
         }
       ]
     }
   ],
   "summary": {
-    "offense_count": 4,
+    "offense_count": 5,
     "target_file_count": 1,
     "inspected_file_count": 1
   }

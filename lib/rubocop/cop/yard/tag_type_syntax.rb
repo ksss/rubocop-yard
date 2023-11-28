@@ -27,7 +27,7 @@ module RuboCop
         def check(comment)
           docstring = comment.text.gsub(/\A#\s*/, '')
           ::YARD::DocstringParser.new.parse(docstring).tags.each do |tag|
-            types = extract_tag_types(tag)
+            types = extract_tag_types(tag) or next
 
             check_syntax_error(comment) do
               parse_type(types.join(', '))
