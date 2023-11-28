@@ -1,5 +1,13 @@
 ## [Unreleased]
 
+## [0.9.0] - 2023-11-28
+
+- Add `YARD/TagTypePosition`
+
+## [0.8.0] - 2023-11-6
+
+- Support EnforcedStylePrototypeName
+
 ## [0.7.0] - 2023-10-14
 
 - New feature
