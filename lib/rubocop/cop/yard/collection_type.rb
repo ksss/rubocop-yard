@@ -112,10 +112,6 @@ module RuboCop
           corrector.replace(comment, comment.source.sub(/\[(.*)\]/) { "[#{styled_string(types_explainer)}]" })
         end
 
-        def inline_comment?(comment)
-          !comment_line?(comment.source_range.source_line)
-        end
-
         def include_yard_tag?(comment)
           comment.source.match?(/@(?:param|return|option|raise|yieldparam|yieldreturn)\s+.*\[.*\]/)
         end
