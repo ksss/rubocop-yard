@@ -5,12 +5,32 @@ module RuboCop
   end
   module Cop
     module YARD
+      type tag_types = YARD::Tags::TypesExplainer::Type
+                     | ::YARD::Tags::TypesExplainer::CollectionType
+                     | ::YARD::Tags::TypesExplainer::FixedCollectionType
+                     | ::YARD::Tags::TypesExplainer::HashCollectionType
       class CollectionType
-        type t = YARD::Tags::TypesExplainer::Type
-               | ::YARD::Tags::TypesExplainer::CollectionType
-               | ::YARD::Tags::TypesExplainer::FixedCollectionType
-               | ::YARD::Tags::TypesExplainer::HashCollectionType
-        private def check_mismatch_collection_type: (untyped comment, t types_explainer) -> void
+        private def check_mismatch_collection_type: (untyped comment, tag_types types_explainer) -> void
+      end
+
+      module Helper
+        def extract_tag_types: (::YARD::Tags::OptionTag | ::YARD::Tags::Tag tag) -> Array[String]?
+      end
+
+      class TagTypeSyntax < ::RuboCop::Cop::Base
+        include YARD::Helper
+
+        private
+
+        def check: (::Parser::Source::Comment comment) -> void
+        def check_syntax_error: (::Parser::Source::Comment comment) { () -> void } -> void
+        def inline_comment?: (::Parser::Source::Comment comment) -> bool
+        def include_yard_tag?: (::Parser::Source::Comment comment) -> bool
+        def tag_range_for_comment: (::Parser::Source::Comment comment) -> untyped
+      end
+
+      class MismatchName < ::RuboCop::Cop::Base
+        include YARD::Helper
       end
     end
   end

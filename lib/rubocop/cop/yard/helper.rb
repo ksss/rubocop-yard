@@ -19,7 +19,7 @@ module RuboCop
 
         def each_types_explainer(docstring, &block)
           docstring.tags.each do |tag|
-            types = extract_tag_types(tag)
+            types = extract_tag_types(tag) or next
 
             begin
               types_explainers = parse_type(types.join(', '))

@@ -57,6 +57,7 @@ module RuboCop
               end
 
               next unless node.arguments.none? { |arg_node| tag.name.to_sym == arg_node.name }
+              next unless types
 
               begin
                 parse_type(types.join(', '))
