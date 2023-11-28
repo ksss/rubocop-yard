@@ -32,6 +32,9 @@ namespace :smoke do
       { name: "collection_type", style: "long", correct: true },
       { name: "collection_type", style: "short", correct: true },
     ],
+    'YARD/TagTypePosition' => [
+      { name: "tag_type_position" }
+    ]
   }
   task :start_server do
     sh "bundle exec rubocop --restart-server"

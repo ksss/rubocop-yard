@@ -16,6 +16,15 @@ module RuboCop
 
       module Helper
         def extract_tag_types: (tag tag) -> Array[String]?
+        def inline_comment?: (::Parser::Source::Comment comment) -> bool
+      end
+
+      class TagTypePosition < ::RuboCop::Cop::Base
+        include YARD::Helper
+
+        def check: (::Parser::Source::Comment comment) -> void
+        def include_yard_tag?: (::Parser::Source::Comment comment) -> bool
+        def include_yard_tag_type?: (::Parser::Source::Comment comment) -> bool
       end
 
       class TagTypeSyntax < ::RuboCop::Cop::Base
@@ -25,7 +34,6 @@ module RuboCop
 
         def check: (::Parser::Source::Comment comment) -> void
         def check_syntax_error: (::Parser::Source::Comment comment) { () -> void } -> void
-        def inline_comment?: (::Parser::Source::Comment comment) -> bool
         def include_yard_tag?: (::Parser::Source::Comment comment) -> bool
         def tag_range_for_comment: (::Parser::Source::Comment comment) -> untyped
       end

@@ -35,3 +35,7 @@ YARD/MismatchName:
     - before
     - after
 
+YARD/TagTypePosition:
+  Description: 'Notice tag type position'
+  Enabled: true
+  VersionAdded: '0.9.0'

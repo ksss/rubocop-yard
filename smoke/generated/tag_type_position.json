@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "rubocop_version": "1.56.2",
+    "rubocop_version": "1.57.2",
     "ruby_engine": "ruby",
     "ruby_version": "3.2.2",
     "ruby_patchlevel": "53",
@@ -8,38 +8,38 @@
   },
   "files": [
     {
-      "path": "smoke/tag_type_syntax.rb",
+      "path": "smoke/tag_type_position.rb",
       "offenses": [
         {
           "severity": "convention",
-          "message": "(SyntaxError) invalid character at |",
-          "cop_name": "YARD/TagTypeSyntax",
+          "message": "This docs found `[Integer]`, but parser of YARD can't found types. Please check syntax of YARD.",
+          "cop_name": "YARD/TagTypePosition",
           "corrected": false,
           "correctable": false,
           "location": {
             "start_line": 2,
-            "start_column": 13,
+            "start_column": 3,
             "last_line": 2,
-            "last_column": 20,
-            "length": 8,
+            "last_column": 28,
+            "length": 26,
             "line": 2,
-            "column": 13
+            "column": 3
           }
         },
         {
           "severity": "convention",
-          "message": "(SyntaxError) expecting END, got name 'bbb'",
-          "cop_name": "YARD/TagTypeSyntax",
+          "message": "This docs found `[Integer]`, but parser of YARD can't found types. Please check syntax of YARD.",
+          "cop_name": "YARD/TagTypePosition",
           "corrected": false,
           "correctable": false,
           "location": {
             "start_line": 3,
-            "start_column": 22,
+            "start_column": 3,
             "last_line": 3,
             "last_column": 29,
-            "length": 8,
+            "length": 27,
             "line": 3,
-            "column": 22
+            "column": 3
           }
         }
       ]

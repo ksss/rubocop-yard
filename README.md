@@ -15,6 +15,15 @@ Check tag type syntax error.
           ^^^^^^^^^^^^^ (SyntaxError) invalid character at |
 ```
 
+### `YARD/TagTypePosition`
+
+Notice tag type position.
+
+```
+# @option [Integer] opts foo
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^ This docs found `[Integer]`, but parser of YARD can't found types. Please check syntax of YARD.
+```
+
 ### `YARD/CollectionStyle`
 
 `EnforcedStyle long (default)`

@@ -8,6 +8,8 @@ module RuboCop
           case tag
           when ::YARD::Tags::OptionTag
             tag.pair.types
+          when ::YARD::Tags::OverloadTag
+            tag.types
           else
             tag.types
           end
@@ -68,6 +70,10 @@ module RuboCop
           else
             raise "#{types_explainer.class} is not supported"
           end
+        end
+
+        def inline_comment?(comment)
+          !comment_line?(comment.source_range.source_line)
         end
       end
     end
