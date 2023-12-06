@@ -75,6 +75,17 @@ module RuboCop
         def inline_comment?(comment)
           !comment_line?(comment.source_range.source_line)
         end
+
+        def build_docstring(preceding_lines)
+          comment_texts = preceding_lines.map { |l| l.text.gsub(/\A#/, '') }
+          minimum_space = comment_texts.map { |t| t.index(/[^\s]/) }.min
+          yard_docstring = comment_texts.map { |t| t[minimum_space..-1] }.join("\n")
+          begin
+            ::YARD::DocstringParser.new.parse(yard_docstring)
+          rescue
+            nil
+          end
+        end
       end
     end
   end

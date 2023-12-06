@@ -20,6 +20,7 @@ module RuboCop
       #   # good
       #   CONST = 1
       class MeaninglessTag < Base
+        include YARD::Helper
         include RangeHelp
         include DocumentationComment
         extend AutoCorrector
@@ -34,8 +35,9 @@ module RuboCop
           preceding_lines = preceding_lines(node)
           return false unless preceding_comment?(node, preceding_lines.last)
 
-          yard_docstring = preceding_lines.map { |line| line.text.gsub(/\A#\s*/, '') }.join("\n")
-          docstring = ::YARD::DocstringParser.new.parse(yard_docstring)
+          docstring = build_docstring(preceding_lines)
+          return false unless docstring
+
           docstring.tags.each do |tag|
             next unless tag.tag_name == 'param' || tag.tag_name == 'option'
 

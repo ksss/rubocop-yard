@@ -44,6 +44,11 @@ class Foo
 
   def empty_doc(arg)
   end
+
+  # @param [String]
+  #   arg doc
+  def returned(arg)
+  end
 end
 
 # https://github.com/ksss/rubocop-yard/issues/18
