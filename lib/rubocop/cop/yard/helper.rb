@@ -78,7 +78,7 @@ module RuboCop
 
         def build_docstring(preceding_lines)
           comment_texts = preceding_lines.map { |l| l.text.gsub(/\A#/, '') }
-          minimum_space = comment_texts.map { |t| t.index(/[^\s]/) }.min
+          minimum_space = comment_texts.map { |t| t.index(/[^\s]/) }.compact.min
           yard_docstring = comment_texts.map { |t| t[minimum_space..-1] }.join("\n")
           begin
             ::YARD::DocstringParser.new.parse(yard_docstring)
