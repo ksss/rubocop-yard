@@ -19,7 +19,8 @@ namespace :smoke do
       { name: "tag_type_syntax" }
     ],
     'YARD/MeaninglessTag' => [
-      { name: "meaningless_tag" }
+      { name: "meaningless_tag" },
+      { name: "meaningless_tag_n_plus_one_query" },
     ],
     'YARD/MismatchName' => [
       { name: "mismatch_name", correct: true }
