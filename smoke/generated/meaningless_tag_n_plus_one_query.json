@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "rubocop_version": "1.57.2",
+    "ruby_engine": "ruby",
+    "ruby_version": "3.2.2",
+    "ruby_patchlevel": "53",
+    "ruby_platform": "arm64-darwin22"
+  },
+  "files": [
+    {
+      "path": "smoke/meaningless_tag_n_plus_one_query.rb",
+      "offenses": []
+    }
+  ],
+  "summary": {
+    "offense_count": 0,
+    "target_file_count": 1,
+    "inspected_file_count": 1
+  }
+}
