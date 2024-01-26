@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+- Suppress YARD warning logs
+
 ## [0.9.0] - 2023-11-28
 
 - Add `YARD/TagTypePosition`

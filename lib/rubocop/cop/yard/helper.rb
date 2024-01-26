@@ -81,7 +81,9 @@ module RuboCop
           minimum_space = comment_texts.map { |t| t.index(/[^\s]/) }.compact.min
           yard_docstring = comment_texts.map { |t| t[minimum_space..-1] }.join("\n")
           begin
-            ::YARD::DocstringParser.new.parse(yard_docstring)
+            ::YARD::Logger.instance.enter_level(::YARD::Logger::ERROR) do
+              ::YARD::DocstringParser.new.parse(yard_docstring)
+            end
           rescue
             nil
           end
