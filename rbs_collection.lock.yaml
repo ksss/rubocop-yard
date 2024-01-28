@@ -6,7 +6,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: ast
@@ -14,7 +14,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: base64
@@ -30,7 +30,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: connection_pool
@@ -38,7 +38,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: csv
@@ -70,7 +70,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: io-console
@@ -86,7 +86,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: logger
@@ -114,7 +114,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: parser
@@ -122,7 +122,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: pstore
@@ -138,7 +138,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: rake
@@ -146,7 +146,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: rdoc
@@ -158,7 +158,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: ripper
@@ -170,7 +170,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: rubocop-ast
@@ -178,7 +178,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: securerandom
@@ -210,7 +210,7 @@ gems:
   source:
     type: git
     name: ruby/gem_rbs_collection
-    revision: 4b0d2f72e63b6c3e92dc54e19ce23dd24524f9a7
+    revision: 846c09971455f0e144cef2f5a6c9fe6d8905d3e1
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 gemfile_lock_path: Gemfile.lock
