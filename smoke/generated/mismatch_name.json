@@ -124,17 +124,33 @@
         },
         {
           "severity": "convention",
+          "message": "This method has argument `arg2`, But not documented",
+          "cop_name": "YARD/MismatchName",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 33,
+            "start_column": 3,
+            "last_line": 33,
+            "last_column": 28,
+            "length": 26,
+            "line": 33,
+            "column": 3
+          }
+        },
+        {
+          "severity": "convention",
           "message": "`context,` is not found in method arguments of [context]",
           "cop_name": "YARD/MismatchName",
           "corrected": false,
           "correctable": false,
           "location": {
-            "start_line": 52,
+            "start_line": 56,
             "start_column": 18,
-            "last_line": 52,
+            "last_line": 56,
             "last_column": 25,
             "length": 8,
-            "line": 52,
+            "line": 56,
             "column": 18
           }
         }
@@ -142,7 +158,7 @@
     }
   ],
   "summary": {
-    "offense_count": 8,
+    "offense_count": 9,
     "target_file_count": 1,
     "inspected_file_count": 1
   }
