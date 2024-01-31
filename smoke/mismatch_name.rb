@@ -30,6 +30,10 @@ class Foo
   def ref_only(arg)
   end
 
+  # @param arg1 (see #other)
+  def partial_ref(arg1, arg2)
+  end
+
   # @param [String] arg
   def rest_block(arg, *, **, &block)
   end
