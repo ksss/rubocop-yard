@@ -15,11 +15,17 @@ class Foo
   end
 
   # @param [String] strings
-  # @param [Object] opts
-  # @param [Object] a
+  # @param [Hash{Symbol => Object}] opts
+  # @param [Object, nil] a
   # @param [Array<Object>] rest
   # @param [Hash{Symbol => Object}] kw
   def bar(strings, opts = {}, a = nil, *rest, **kw)
+  end
+
+  # @param [Object] a
+  # @param [Object, nil] b
+  # @param [Boolean] c
+  def baz(a, b = nil, c: false)
   end
 
   # @return [void]

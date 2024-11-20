@@ -97,28 +97,53 @@ module RuboCop
 
         # @param [RuboCop::AST::ArgNode] argument
         def tag_prototype(argument)
-          case argument.type
-          when :kwrestarg
-            case cop_config_prototype_name
-            when "before"
-              "@param #{argument.name} [Hash{Symbol => Object}]"
-            when "after"
-              "@param [Hash{Symbol => Object}] #{argument.name}"
-            end
-          when :restarg
-            case cop_config_prototype_name
-            when "before"
-              "@param #{argument.name} [Array<Object>]"
-            when "after"
-              "@param [Array<Object>] #{argument.name}"
-            end
+          type = case argument.type
+                 when :kwrestarg
+                   "Hash{Symbol => Object}"
+                 when :restarg
+                   "Array<Object>"
+                 when :optarg, :kwoptarg
+                   literal_to_yard_type(argument.children.last)
+                 else
+                   "Object"
+                 end
+
+          case cop_config_prototype_name
+          when "before"
+            "@param #{argument.name} [#{type}]"
+          when "after"
+            "@param [#{type}] #{argument.name}"
+          end
+        end
+
+        def literal_to_yard_type(node)
+          case node.type
+          when :int
+            "Integer"
+          when :float
+            "Float"
+          when :rational
+            "Rational"
+          when :complex
+            "Complex"
+          when :str
+            "String"
+          when :true, :false
+            "Boolean"
+          when :sym
+            "Symbol"
+          when :array
+            "Array<Object>"
+          when :hash
+            "Hash{Symbol => Object}"
+          when :regexp
+            "Regexp"
+          when :irange, :erange
+            "Range[Object]"
+          when :nil
+            "Object, nil"
           else
-            case cop_config_prototype_name
-            when "before"
-              "@param #{argument.name} [Object]"
-            when "after"
-              "@param [Object] #{argument.name}"
-            end
+            "Object"
           end
         end
 

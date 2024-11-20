@@ -1,10 +1,10 @@
 {
   "metadata": {
-    "rubocop_version": "1.57.2",
+    "rubocop_version": "1.68.0",
     "ruby_engine": "ruby",
-    "ruby_version": "3.2.2",
-    "ruby_patchlevel": "53",
-    "ruby_platform": "arm64-darwin22"
+    "ruby_version": "3.3.6",
+    "ruby_patchlevel": "108",
+    "ruby_platform": "arm64-darwin23"
   },
   "files": [
     {
@@ -124,17 +124,33 @@
         },
         {
           "severity": "convention",
+          "message": "This method has argument `b`, But not documented",
+          "cop_name": "YARD/MismatchName",
+          "corrected": false,
+          "correctable": true,
+          "location": {
+            "start_line": 21,
+            "start_column": 3,
+            "last_line": 21,
+            "last_column": 21,
+            "length": 19,
+            "line": 21,
+            "column": 3
+          }
+        },
+        {
+          "severity": "convention",
           "message": "This method has argument `arg2`, But not documented",
           "cop_name": "YARD/MismatchName",
           "corrected": false,
           "correctable": true,
           "location": {
-            "start_line": 33,
+            "start_line": 37,
             "start_column": 3,
-            "last_line": 33,
+            "last_line": 37,
             "last_column": 28,
             "length": 26,
-            "line": 33,
+            "line": 37,
             "column": 3
           }
         },
@@ -145,12 +161,12 @@
           "corrected": false,
           "correctable": false,
           "location": {
-            "start_line": 56,
+            "start_line": 60,
             "start_column": 18,
-            "last_line": 56,
+            "last_line": 60,
             "last_column": 25,
             "length": 8,
-            "line": 56,
+            "line": 60,
             "column": 18
           }
         }
@@ -158,7 +174,7 @@
     }
   ],
   "summary": {
-    "offense_count": 9,
+    "offense_count": 10,
     "target_file_count": 1,
     "inspected_file_count": 1
   }
