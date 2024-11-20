@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+## [0.10.0] - 2024-11-20
+
+* Guess argument types by @ksss in https://github.com/ksss/rubocop-yard/pull/32
+
+## [0.9.3] - 2024-01-31
+
 - Suppress YARD warning logs
 
 ## [0.9.0] - 2023-11-28
