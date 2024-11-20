@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rubocop-yard (0.9.3)
+    rubocop-yard (0.10.0)
       rubocop (~> 1.21)
       yard
 
