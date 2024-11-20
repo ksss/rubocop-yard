@@ -18,6 +18,10 @@ class Foo
   def bar(strings, opts = {}, a = nil, *rest, **kw)
   end
 
+  # @param [Object] a
+  def baz(a, b = nil, c: false)
+  end
+
   # @return [void]
   def return_only(arg)
   end
