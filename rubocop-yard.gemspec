@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.metadata["source_code_uri"] = spec.homepage
   spec.metadata["changelog_uri"] = spec.homepage
   spec.metadata['rubygems_mfa_required'] = 'true'
+  spec.metadata['default_lint_roller_plugin'] = 'RuboCop::YARD::Plugin'
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     [
@@ -31,6 +32,7 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_runtime_dependency 'lint_roller'
   spec.add_runtime_dependency 'rubocop', "~> 1.72"
   spec.add_runtime_dependency 'yard'
 end
