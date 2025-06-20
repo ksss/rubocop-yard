@@ -7,7 +7,7 @@ gemspec
 
 gem "rake", "~> 13.0"
 
-gem "rubocop", "~> 1.21"
+gem "rubocop", "~> 1.72"
 gem 'debug'
 gem 'steep'
 gem 'activesupport', '~> 7.0' # 8.0 needs Ruby 3.2
