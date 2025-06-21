@@ -131,7 +131,8 @@ If bundler is not being used to manage dependencies, install the gem by executin
 Put this into your `.rubocop.yml`.
 
 ```yaml
-require: rubocop-yard
+plugins:
+  - rubocop-yard
 ```
 
 ## Development
