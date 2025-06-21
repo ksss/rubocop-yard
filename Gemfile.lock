@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rubocop-yard (0.10.0)
+    rubocop-yard (1.0.0)
       lint_roller
       rubocop (~> 1.72)
       yard
