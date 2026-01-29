@@ -102,6 +102,10 @@ RSpec.describe RuboCop::Cop::YARD::MismatchName, :config do
         #   arg multiline doc
         def multiline_param(arg)
         end
+
+        # @param text [Array<String>]
+        def kwnilarg(text, **nil)
+        end
       end
     RUBY
   end
