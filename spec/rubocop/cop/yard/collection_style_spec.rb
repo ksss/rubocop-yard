@@ -37,6 +37,30 @@ RSpec.describe RuboCop::Cop::YARD::CollectionStyle, :config do
           # @param [Array(Symbol)]
           # @param [Array<Symbol>]
           # @param [Hash{Symbol => String}]
+          # @param [Range<Integer>]
+          # @param [Dict{Symbol=>String}]
+          def foo
+          end
+        end
+      RUBY
+    end
+
+    it 'handles complex nested types' do
+      expect_offense(<<~RUBY)
+        class Foo
+          # @param [<<<Symbol>>>]
+          ^^^^^^^^^^^^^^^^^^^^^^^ `<<<Symbol>>>` is using short style syntax
+          # @param [Array<{Symbol => <Integer>, List<Integer>}>]
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `Array<{Symbol => <Integer>, List<Integer>}>` is using short style syntax
+          def foo
+          end
+        end
+      RUBY
+
+      expect_correction(<<~RUBY)
+        class Foo
+          # @param [Array<Array<Array<Symbol>>>]
+          # @param [Array<Hash{Symbol => Array<Integer>, List<Integer>}>]
           def foo
           end
         end

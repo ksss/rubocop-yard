@@ -88,6 +88,20 @@ RSpec.describe RuboCop::Cop::YARD::MismatchName, :config do
         # @param [String] arg
         def rest_block(arg, *, **, &block)
         end
+
+        # @param [String] arg
+        def delegate(arg, ...)
+        end
+
+        # @param arg1 (see #other)
+        # @param [Object] arg2
+        def partial_ref(arg1, arg2)
+        end
+
+        # @param [String]
+        #   arg multiline doc
+        def multiline_param(arg)
+        end
       end
     RUBY
   end

@@ -44,6 +44,26 @@ RSpec.describe RuboCop::Cop::YARD::CollectionType, :config do
           # @param [Array(String)]
           # @param [Array<String>]
           # @param [Range<Integer>]
+          # @param [Dict{Symbol => String}]
+          def foo
+          end
+        end
+      RUBY
+    end
+
+    it 'handles deeply nested types' do
+      expect_offense(<<~RUBY)
+        class Foo
+          # @param [Hash<Symbol, {Symbol => Range<Integer>}>]
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `Hash<Key, Value>` is ambiguous syntax
+          def foo
+          end
+        end
+      RUBY
+
+      expect_correction(<<~RUBY)
+        class Foo
+          # @param [Hash{Symbol => Hash{Symbol => Range<Integer>}}]
           def foo
           end
         end
