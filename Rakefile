@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 require "bundler/gem_tasks"
-require "rake/testtask"
+require "rspec/core/rake_task"
 require "rubocop/rake_task"
 
 RuboCop::RakeTask.new
+RSpec::Core::RakeTask.new(:spec)
 
-task default: ['smoke:test', :check_default_yml]
+task default: [:spec, :check_default_yml]
 
 task :check_default_yml do
   require 'yaml'
