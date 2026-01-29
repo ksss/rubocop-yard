@@ -72,7 +72,8 @@ module RuboCop
           end
           node.arguments.each do |argument|
             next if argument.type == :blockarg
-            next if argument.name.nil?
+            next if argument.type == :kwnilarg
+            next if !argument.respond_to?(:name) || argument.name.nil?
 
             found = docstring.tags.find do |tag|
               next unless tag.tag_name == 'param' || tag.tag_name == 'option'
