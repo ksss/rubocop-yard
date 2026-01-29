@@ -1,5 +1,14 @@
 ## [Unreleased]
 
+## [1.1.0] - 2026-01-29
+
+* Fix NoMethodError when method signature includes **nil by @ksss in https://github.com/ksss/rubocop-yard/pull/39
+* Migrate smoke tests to RSpec by @ksss in https://github.com/ksss/rubocop-yard/pull/38
+
+## [1.0.0] - 2025-06-21
+
+* Use plugins instead of require by @sue445 in https://github.com/ksss/rubocop-yard/pull/34
+
 ## [0.10.0] - 2024-11-20
 
 * Guess argument types by @ksss in https://github.com/ksss/rubocop-yard/pull/32
