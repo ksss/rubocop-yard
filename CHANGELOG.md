@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+* `YARD/MeaninglessTag`: Allow `@param` on `Struct.new`/`Data.define` constant assignments (https://github.com/ksss/rubocop-yard/issues/36)
+
 ## [1.1.0] - 2026-01-29
 
 * Fix NoMethodError when method signature includes **nil by @ksss in https://github.com/ksss/rubocop-yard/pull/39
