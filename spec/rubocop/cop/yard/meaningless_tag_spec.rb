@@ -36,4 +36,31 @@ RSpec.describe RuboCop::Cop::YARD::MeaninglessTag, :config do
       end
     RUBY
   end
+
+  it 'does not register an offense for @param on Struct/Data constant assignments' do
+    expect_no_offenses(<<~RUBY)
+      # @param required_gems [Array<String>]
+      # @param helper_modules [Array<String>]
+      GemHelpers = Struct.new(:required_gems, :helper_modules, keyword_init: true)
+
+      # @param name [String]
+      Point = Data.define(:name)
+
+      # @param x [Integer]
+      # @param y [Integer]
+      WithBlock = Struct.new(:x, :y) do
+        def sum
+          x + y
+        end
+      end
+    RUBY
+  end
+
+  it 'still registers an offense for @option on Struct/Data constant assignments' do
+    expect_offense(<<~RUBY)
+      # @option opts [String] :key
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `@option` is meaningless tag on casgn
+      GemHelpers = Struct.new(:required_gems, keyword_init: true)
+    RUBY
+  end
 end

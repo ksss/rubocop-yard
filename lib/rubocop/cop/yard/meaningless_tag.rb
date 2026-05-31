@@ -19,11 +19,25 @@ module RuboCop
       #
       #   # good
       #   CONST = 1
+      #
+      #   # good (Struct/Data constant assignments accept @param)
+      #   # @param name [String]
+      #   # @param age [Integer]
+      #   Person = Struct.new(:name, :age, keyword_init: true)
       class MeaninglessTag < Base
         include YARD::Helper
         include RangeHelp
         include DocumentationComment
         extend AutoCorrector
+
+        # @!method struct_or_data_definition?(node)
+        #   @param node [RuboCop::AST::Node]
+        def_node_matcher :struct_or_data_definition?, <<~PATTERN
+          (casgn _ _ {
+            (block (send (const _ {:Struct :Data}) {:new :define} ...) ...)
+            (send (const _ {:Struct :Data}) {:new :define} ...)
+          })
+        PATTERN
 
         def on_class(node)
           check(node)
@@ -40,6 +54,7 @@ module RuboCop
 
           docstring.tags.each do |tag|
             next unless tag.tag_name == 'param' || tag.tag_name == 'option'
+            next if tag.tag_name == 'param' && struct_or_data_definition?(node)
 
             comment = preceding_lines.find { |line| line.text.include?("@#{tag.tag_name}") }
             next unless comment
