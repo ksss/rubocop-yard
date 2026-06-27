@@ -25,6 +25,8 @@ module RuboCop
 
             begin
               types_explainers = parse_type(types.join(', '))
+              next if types.size != types_explainers.size
+
               types.zip(types_explainers).each do |type, types_explainer|
                 block.call(type, types_explainer)
               end

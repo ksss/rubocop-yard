@@ -108,4 +108,19 @@ RSpec.describe RuboCop::Cop::YARD::CollectionStyle, :config do
       RUBY
     end
   end
+
+  context 'when YARD parses types into a different number of explainers' do
+    let(:cop_config) { { 'EnforcedStyle' => 'long' } }
+
+    # @see https://github.com/ksss/rubocop-yard/issues/43
+    it 'does not register an offense or destructively autocorrect' do
+      expect_no_offenses(<<~RUBY)
+        class Foo
+          # @return [Array<Hash{Symbol => String}>, nil]
+          def foo
+          end
+        end
+      RUBY
+    end
+  end
 end
