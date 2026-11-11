@@ -1,5 +1,6 @@
 ## [Unreleased]
 
+* Add new cop `YARD/StructParamTag` (disabled by default) to prefer `@param` over `@!attribute` for `Struct.new`/`Data.define` members
 * `YARD/MeaninglessTag`: Allow `@param` on `Struct.new`/`Data.define` constant assignments (https://github.com/ksss/rubocop-yard/issues/36)
 
 ## [1.1.0] - 2026-01-29
