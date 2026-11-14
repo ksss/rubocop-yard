@@ -1,6 +1,15 @@
 ## [Unreleased]
 
-* Add new cop `YARD/StructParamTag` (disabled by default) to prefer `@param` over `@!attribute` for `Struct.new`/`Data.define` members
+## [1.4.0] - 2026-11-14
+
+* Add new cop `YARD/StructParamTag` (disabled by default) to prefer `@param` over `@!attribute` for `Struct.new`/`Data.define` members by @lekemula in https://github.com/ksss/rubocop-yard/pull/46
+
+## [1.3.0] - 2026-06-27
+
+* Guard against YARD parser type/explainer size mismatch by @ksss in https://github.com/ksss/rubocop-yard/pull/45
+
+## [1.2.0] - 2026-06-01
+
 * `YARD/MeaninglessTag`: Allow `@param` on `Struct.new`/`Data.define` constant assignments (https://github.com/ksss/rubocop-yard/issues/36)
 
 ## [1.1.0] - 2026-01-29
