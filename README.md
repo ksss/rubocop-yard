@@ -116,6 +116,16 @@ module Foo
   CONST = 1
 ```
 
+### `YARD/StructParamTag`
+
+Prefer `@param` over `@!attribute` for `Struct.new`/`Data.define` members (disabled by default). YARD reads both, but some tools, such as Solargraph, read only `@param` there.
+
+```rb
+# @!attribute name [String]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use `@param` instead of `@!attribute` for Struct/Data members.
+Person = Struct.new(:name)
+```
+
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
