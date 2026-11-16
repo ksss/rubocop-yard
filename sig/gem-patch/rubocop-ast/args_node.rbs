@@ -1,0 +1,12 @@
+# gem_rbs_collection (rubocop-ast 1.46) declares CollectionNode without the Array methods it forwards to #to_a.
+# The elements are ArgNode in most cases, but can be MlhsNode (`def m((a, b))`) or a bare Node (`**nil`).
+module RuboCop
+  module AST
+    class ArgsNode
+      include Enumerable[Node]
+
+      def each: () { (Node) -> void } -> Array[Node]
+              | () -> Enumerator[Node, Array[Node]]
+    end
+  end
+end

@@ -39,7 +39,7 @@ module RuboCop
               next unless comment
 
               # YARD::Tags::RefTagList is not has name and types
-              next if tag.instance_of?(::YARD::Tags::RefTagList)
+              next if tag.is_a?(::YARD::Tags::RefTagList)
 
               types = extract_tag_types(tag)
               unless tag.name && types
@@ -52,7 +52,7 @@ module RuboCop
                 next
               end
 
-              next unless node.arguments.none? { |arg_node| tag.name.to_sym == arg_node.name }
+              next unless node.arguments.none? { |arg_node| arg_node.is_a?(::RuboCop::AST::ArgNode) && tag.name.to_sym == arg_node.name }
               next unless types
 
               begin
@@ -67,13 +67,13 @@ module RuboCop
 
           # Documentation only or just `@return` is a common form of documentation.
           # The subsequent features will be limited to cases where both `@param` and `@option` are present.
-          unless docstring.tags.find { |tag| (tag.tag_name == 'param' && !(tag.instance_of?(::YARD::Tags::RefTagList) && tag.name.nil?)) || tag.tag_name == 'option' }
+          unless docstring.tags.find { |tag| (tag.tag_name == 'param' && !(tag.is_a?(::YARD::Tags::RefTagList) && tag.name.nil?)) || tag.tag_name == 'option' }
             return false
           end
           node.arguments.each do |argument|
             next if argument.type == :blockarg
             next if argument.type == :kwnilarg
-            next if !argument.respond_to?(:name) || argument.name.nil?
+            next unless argument.is_a?(::RuboCop::AST::ArgNode) && argument.name
 
             found = docstring.tags.find do |tag|
               next unless tag.tag_name == 'param' || tag.tag_name == 'option'
@@ -171,19 +171,20 @@ module RuboCop
         end
 
         def add_offense_to_tag(node, comment, tag)
-          tag_name_regexp = Regexp.new("\\s#{Regexp.escape(tag.name)}\\s")
+          name = tag.name #: String
+          tag_name_regexp = Regexp.new("\\s#{Regexp.escape(name)}\\s")
           start_column = comment.source.index(tag_name_regexp) or return
           offense_start = comment.location.column + start_column
-          offense_end = offense_start + tag.name.length - 1
+          offense_end = offense_start + name.length - 1
           range = source_range(processed_source.buffer, comment.location.line, offense_start..offense_end)
-          argument_names = node.arguments.map(&:name).compact
+          argument_names = node.arguments.filter_map { |arg_node| arg_node.name if arg_node.is_a?(::RuboCop::AST::ArgNode) }
           argument_name =
             if argument_names.empty?
               ''
             else
               " of [#{argument_names.join(', ')}]"
             end
-          add_offense(range, message: "`#{tag.name}` is not found in method arguments#{argument_name}")
+          add_offense(range, message: "`#{name}` is not found in method arguments#{argument_name}")
           ignore_node(comment)
         end
 

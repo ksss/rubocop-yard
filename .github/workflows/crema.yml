@@ -1,0 +1,35 @@
+name: Type check by crema
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  CREMA_VERSION: v0.5.1
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6.0.2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ruby
+        bundler-cache: true
+    - name: Install crema
+      working-directory: ${{ runner.temp }}
+      run: |
+        target="amazonlinux-2023-$(uname -m)"
+        curl -fsSLO "https://github.com/ksss/crema/releases/download/${CREMA_VERSION}/crema-${CREMA_VERSION}-${target}.tar.gz"
+        curl -fsSLO "https://github.com/ksss/crema/releases/download/${CREMA_VERSION}/checksums.txt"
+        sha256sum -c --ignore-missing checksums.txt
+        tar -xzf "crema-${CREMA_VERSION}-${target}.tar.gz" crema
+        install -m 0755 crema /usr/local/bin/crema
+        crema --version
+    - name: Install RBS collection
+      run: bundle exec rbs collection install
+    - name: Type check
+      run: crema check

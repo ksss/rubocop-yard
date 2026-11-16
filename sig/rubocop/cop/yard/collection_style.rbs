@@ -1,0 +1,22 @@
+module RuboCop
+  module Cop
+    module YARD
+      class CollectionStyle < Base
+        include YARD::Helper
+        include RangeHelp
+        include ConfigurableEnforcedStyle
+        include YARD::StyledString
+        extend AutoCorrector
+
+        def on_new_investigation: () -> void
+
+        private
+
+        def check: (Parser::Source::Comment comment) -> void
+        def ignore_whitespace: (String str) -> String
+        def bad_style: () -> (:short | :long)
+        def include_yard_tag?: (Parser::Source::Comment comment) -> bool
+      end
+    end
+  end
+end

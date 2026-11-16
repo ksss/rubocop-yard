@@ -1,0 +1,9 @@
+module RuboCop
+  module YARD
+    class Plugin < LintRoller::Plugin
+      def about: () -> LintRoller::About
+      def supported?: (LintRoller::Context context) -> bool
+      def rules: (LintRoller::Context _context) -> LintRoller::Rules
+    end
+  end
+end

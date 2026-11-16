@@ -1,0 +1,23 @@
+module RuboCop
+  module Cop
+    module YARD
+      class CollectionType < Base
+        include YARD::Helper
+        include RangeHelp
+        include ConfigurableEnforcedStyle
+        include YARD::StyledString
+        extend AutoCorrector
+
+        def on_new_investigation: () -> void
+
+        private
+
+        def check_mismatch_collection_type: (Parser::Source::Comment comment, ::YARD::DocstringParser docstring) -> void
+        def check_mismatch_collection_type_one: (Parser::Source::Comment comment, ::YARD::Tags::TypesExplainer::t types_explainer) -> void
+        def correct_tag_type: (Corrector corrector, Parser::Source::Comment comment, ::YARD::Tags::TypesExplainer::t types_explainer) -> void
+        def include_yard_tag?: (Parser::Source::Comment comment) -> bool
+        def tag_range_for_comment: (Parser::Source::Comment comment) -> Parser::Source::Range
+      end
+    end
+  end
+end

@@ -1,0 +1,10 @@
+# gem_rbs_collection (rubocop 1.57) accepts only Range or Node,
+# but the implementation accepts anything that responds to #source_range, such as Parser::Source::Comment.
+module RuboCop
+  module Cop
+    class Corrector
+      def replace: (Parser::Source::Comment range, String content) -> self
+                 | ...
+    end
+  end
+end

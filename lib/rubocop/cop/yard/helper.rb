@@ -10,6 +10,9 @@ module RuboCop
             tag.pair.types
           when ::YARD::Tags::OverloadTag
             tag.types
+          when ::YARD::Tags::RefTagList
+            # A reference tag such as `@param [String] (see #other)` has no types of its own
+            nil
           else
             tag.types
           end
@@ -27,50 +30,11 @@ module RuboCop
               types_explainers = parse_type(types.join(', '))
               next if types.size != types_explainers.size
 
-              types.zip(types_explainers).each do |type, types_explainer|
-                block.call(type, types_explainer)
+              types.each_with_index do |type, i|
+                block.call(type, types_explainers.fetch(i))
               end
             rescue SyntaxError
             end
-          end
-        end
-
-        def styled_string(types_explainer)
-          case types_explainer
-          when ::YARD::Tags::TypesExplainer::HashCollectionType
-            tname = case [style, types_explainer.name]
-            when [:short, 'Hash']
-              ''
-            when [:long, 'Hash']
-              'Hash'
-            else
-              types_explainer.name
-            end
-            "#{tname}{#{types_explainer.key_types.map { styled_string(_1) }.join(', ')} => #{types_explainer.value_types.map { styled_string(_1) }.join(', ')}}"
-          when ::YARD::Tags::TypesExplainer::FixedCollectionType
-            tname = case [style, types_explainer.name]
-            when [:short, 'Array']
-              ''
-            when [:long, 'Array']
-              'Array'
-            else
-              types_explainer.name
-            end
-            "#{tname}(#{types_explainer.types.map { styled_string(_1) }.join(', ')})"
-          when ::YARD::Tags::TypesExplainer::CollectionType
-            tname = case [style, types_explainer.name]
-            when [:short, 'Array']
-              ''
-            when [:long, 'Array']
-              'Array'
-            else
-              types_explainer.name
-            end
-            "#{tname}<#{types_explainer.types.map { styled_string(_1) }.join(', ')}>"
-          when ::YARD::Tags::TypesExplainer::Type
-            types_explainer.name
-          else
-            raise "#{types_explainer.class} is not supported"
           end
         end
 

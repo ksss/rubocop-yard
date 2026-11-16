@@ -1,0 +1,21 @@
+# gem_rbs_collection (rubocop 1.57) mixes RuboCop::Ext::Comment into RuboCop::AST::Comment,
+# but rubocop actually mixes it into Parser::Source::Comment.
+module Parser
+  module Source
+    class Comment
+      include RuboCop::Ext::Comment
+    end
+  end
+end
+
+module RuboCop
+  module Ext
+    interface _Comment
+      def loc: () -> Parser::Source::Map
+    end
+
+    # The patch in lib/rubocop/cop/yard/patch.rb relies on being mixed into Parser::Source::Comment.
+    module Comment : _Comment
+    end
+  end
+end

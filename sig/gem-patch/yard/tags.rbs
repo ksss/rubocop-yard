@@ -1,0 +1,13 @@
+# Declarations not reflected in gem_rbs_collection (yard 0.9)
+
+# OptionTag inherits Tag at runtime, but gem_rbs_collection declares it without a superclass.
+class YARD::Tags::OptionTag
+  attr_accessor tag_name: String
+  attr_accessor name: String?
+end
+
+class YARD::DocstringParser
+  # DocstringParser#tags may also hold RefTagList, created from `@param (see #other)`.
+  def tags: () -> Array[YARD::Tags::t | YARD::Tags::RefTagList]
+          | ...
+end

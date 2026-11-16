@@ -1,0 +1,12 @@
+# Not declared in gem_rbs_collection (rubocop 1.57)
+module RuboCop
+  module Cop
+    module DocumentationComment
+      private
+
+      # node1 and node2 may be a RuboCop::AST::Node or a Parser::Source::Comment. Both respond to #loc.
+      def preceding_comment?: ((RuboCop::AST::Node | Parser::Source::Comment)? node1, (RuboCop::AST::Node | Parser::Source::Comment)? node2) -> bool
+      def preceding_lines: (RuboCop::AST::Node node) -> Array[Parser::Source::Comment]
+    end
+  end
+end

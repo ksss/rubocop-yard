@@ -1,0 +1,20 @@
+module RuboCop
+  module Cop
+    module YARD
+      class MeaninglessTag < Base
+        include YARD::Helper
+        include RangeHelp
+        include DocumentationComment
+        extend AutoCorrector
+
+        def struct_or_data_definition?: (RuboCop::AST::Node node) -> bool
+
+        def on_class: (RuboCop::AST::Node node) -> void
+        alias on_module on_class
+        alias on_casgn on_class
+
+        def check: (RuboCop::AST::Node node) -> void
+      end
+    end
+  end
+end

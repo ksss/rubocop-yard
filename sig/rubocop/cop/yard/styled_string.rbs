@@ -1,0 +1,9 @@
+module RuboCop
+  module Cop
+    module YARD
+      module StyledString : ConfigurableEnforcedStyle
+        def styled_string: (::YARD::Tags::TypesExplainer::t types_explainer) -> String
+      end
+    end
+  end
+end
