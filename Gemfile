@@ -11,5 +11,4 @@ gem "minitest", "~> 5.0"
 
 gem "rubocop"
 gem 'debug'
-gem 'steep'
 gem 'activesupport'

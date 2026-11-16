@@ -1,0 +1,7 @@
+check = ["lib"]
+sig = ["sig"]
+inline = false
+libraries = ["yaml"]
+
+# `case` on a collection name intentionally ignores names other than Hash and Array
+diagnostic = { "Crema::NonExhaustiveCase" = "ignore" }

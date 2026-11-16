@@ -24,7 +24,6 @@ Gem::Specification.new do |spec|
     [
       %w[CODE_OF_CONDUCT.md LICENSE.txt README.md CHANGELOG.md],
       Dir.glob("lib/**/*.rb").grep_v(/_test\.rb\z/),
-      Dir.glob("sig/**/*.rbs"),
       Dir.glob("config/*")
     ].flatten
   end

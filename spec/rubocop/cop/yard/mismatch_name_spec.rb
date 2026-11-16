@@ -109,4 +109,16 @@ RSpec.describe RuboCop::Cop::YARD::MismatchName, :config do
       end
     RUBY
   end
+
+  it 'registers an offense for a mismatched tag on a method with destructuring parameters' do
+    expect_offense(<<~RUBY)
+      class Foo
+        # @param [String] c description
+                         ^ `c` is not found in method arguments of [d]
+        # @param [String] d description
+        def foo((a, b), d)
+        end
+      end
+    RUBY
+  end
 end

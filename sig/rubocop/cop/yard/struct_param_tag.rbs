@@ -1,0 +1,21 @@
+module RuboCop
+  module Cop
+    module YARD
+      class StructParamTag < Base
+        extend AutoCorrector
+
+        MSG: String
+        ATTRIBUTE: Regexp
+        CORRECTABLE_ATTRIBUTE: Regexp
+
+        def struct_or_data_definition?: (RuboCop::AST::Node node) -> bool
+
+        def on_casgn: (RuboCop::AST::CasgnNode node) -> void
+
+        private
+
+        def preceding_comments: (RuboCop::AST::Node node) -> Array[Parser::Source::Comment]
+      end
+    end
+  end
+end

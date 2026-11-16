@@ -1,0 +1,19 @@
+module RuboCop
+  module Cop
+    module YARD
+      class TagTypeSyntax < Base
+        include YARD::Helper
+        include RangeHelp
+
+        def on_new_investigation: () -> void
+
+        private
+
+        def check: (Parser::Source::Comment comment) -> void
+        def check_syntax_error: (Parser::Source::Comment comment) { () -> void } -> void
+        def include_yard_tag?: (Parser::Source::Comment comment) -> bool
+        def tag_range_for_comment: (Parser::Source::Comment comment) -> Parser::Source::Range
+      end
+    end
+  end
+end

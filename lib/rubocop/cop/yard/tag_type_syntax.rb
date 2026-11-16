@@ -48,9 +48,10 @@ module RuboCop
         end
 
         def tag_range_for_comment(comment)
-          start_column = comment.source.index(/\[/) + 1
-          end_column = comment.source.index(/\]/)
-          offense_start = comment.location.column + start_column
+          # include_yard_tag? guarantees that the comment has `[...]`
+          start_column = comment.source.index(/\[/) or raise "`[` is not found in #{comment.source}"
+          end_column = comment.source.index(/\]/) or raise "`]` is not found in #{comment.source}"
+          offense_start = comment.location.column + start_column + 1
           offense_end = comment.location.column + end_column
           source_range(processed_source.buffer, comment.location.line, offense_start..offense_end)
         end

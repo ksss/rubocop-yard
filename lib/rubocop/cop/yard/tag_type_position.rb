@@ -24,7 +24,7 @@ module RuboCop
           ::YARD::DocstringParser.new.parse(docstring).tags.each do |tag|
             types = extract_tag_types(tag)
             if types.nil?
-              match = comment.source.match(/(?<type>\[.+\])/)
+              match = comment.source.match(/(?<type>\[.+\])/) or next
               add_offense(comment, message: "This docs found `#{match[:type]}`, but parser of YARD can't found types. Please check syntax of YARD.")
             end
           end

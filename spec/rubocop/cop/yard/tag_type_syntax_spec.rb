@@ -33,4 +33,14 @@ RSpec.describe RuboCop::Cop::YARD::TagTypeSyntax, :config do
       end
     RUBY
   end
+
+  it 'does not register an offense for a reference tag with brackets' do
+    expect_no_offenses(<<~RUBY)
+      class Foo
+        # @param [String] (see #other)
+        def foo(arg)
+        end
+      end
+    RUBY
+  end
 end

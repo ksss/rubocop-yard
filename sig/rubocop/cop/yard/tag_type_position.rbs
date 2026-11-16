@@ -1,0 +1,18 @@
+module RuboCop
+  module Cop
+    module YARD
+      class TagTypePosition < Base
+        include YARD::Helper
+        include RangeHelp
+
+        def on_new_investigation: () -> void
+
+        private
+
+        def check: (Parser::Source::Comment comment) -> void
+        def include_yard_tag?: (Parser::Source::Comment comment) -> bool
+        def include_yard_tag_type?: (Parser::Source::Comment comment) -> bool
+      end
+    end
+  end
+end

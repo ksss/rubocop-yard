@@ -1,0 +1,10 @@
+# gem_rbs_collection (rubocop 1.57) accepts only Integer as `column`,
+# but the implementation also accepts a Range of columns.
+module RuboCop
+  module Cop
+    module RangeHelp
+      def source_range: (Parser::Source::Buffer source_buffer, Integer line_number, Range[Integer] column) -> Parser::Source::Range
+                      | ...
+    end
+  end
+end

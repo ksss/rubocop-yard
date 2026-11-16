@@ -1,0 +1,27 @@
+module RuboCop
+  module Cop
+    module YARD
+      class MismatchName < Base
+        include YARD::Helper
+        include RangeHelp
+        include DocumentationComment
+        extend AutoCorrector
+
+        @cop_config_prototype_name: String?
+
+        def on_def: (RuboCop::AST::DefNode node) -> void
+        alias on_defs on_def
+
+        private
+
+        def tag_prototype: (RuboCop::AST::ArgNode argument) -> String?
+        def literal_to_yard_type: (RuboCop::AST::Node node) -> String
+        def cop_config_prototype_name: () -> String
+        def each_tags_by_docstring: (Array[String] tag_names, ::YARD::DocstringParser docstring) { (Array[::YARD::Tags::t | ::YARD::Tags::RefTagList] tags) -> void } -> void
+        def find_by_tag: (Array[Parser::Source::Comment] preceding_lines, ::YARD::Tags::t | ::YARD::Tags::RefTagList tag, Integer i) -> Parser::Source::Comment?
+        def add_offense_to_tag: (RuboCop::AST::DefNode node, Parser::Source::Comment comment, ::YARD::Tags::t tag) -> void
+        def include_overload_tag?: (::YARD::DocstringParser docstring) -> bool
+      end
+    end
+  end
+end

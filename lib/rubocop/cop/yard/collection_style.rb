@@ -45,6 +45,7 @@ module RuboCop
         include YARD::Helper
         include RangeHelp
         include ConfigurableEnforcedStyle
+        include YARD::StyledString
         extend AutoCorrector
 
         def on_new_investigation

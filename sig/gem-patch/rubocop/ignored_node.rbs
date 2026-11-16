@@ -1,0 +1,12 @@
+# gem_rbs_collection (rubocop 1.57) accepts only RuboCop::AST::Node,
+# but the implementation only needs #loc and #source_range, which Parser::Source::Comment also has.
+module RuboCop
+  module Cop
+    module IgnoredNode
+      def ignore_node: (Parser::Source::Comment node) -> void
+                     | ...
+      def part_of_ignored_node?: (Parser::Source::Comment node) -> bool
+                               | ...
+    end
+  end
+end

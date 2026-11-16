@@ -1,0 +1,13 @@
+module RuboCop
+  module Cop
+    module YARD
+      module Helper : RuboCop::Cop::Base
+        def extract_tag_types: (::YARD::Tags::t | ::YARD::Tags::RefTagList tag) -> Array[String]?
+        def parse_type: (String type) -> Array[::YARD::Tags::TypesExplainer::t]
+        def each_types_explainer: (::YARD::DocstringParser docstring) { (String type, ::YARD::Tags::TypesExplainer::t types_explainer) -> void } -> void
+        def inline_comment?: (Parser::Source::Comment comment) -> bool
+        def build_docstring: (Array[Parser::Source::Comment] preceding_lines) -> ::YARD::DocstringParser?
+      end
+    end
+  end
+end

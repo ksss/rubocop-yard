@@ -31,4 +31,15 @@ RSpec.describe RuboCop::Cop::YARD::TagTypePosition, :config do
       end
     RUBY
   end
+
+  it 'registers an offense for a reference tag with brackets' do
+    expect_offense(<<~RUBY)
+      class Foo
+        # @param [String] (see #other)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ This docs found `[String]`, but parser of YARD can't found types. Please check syntax of YARD.
+        def foo(arg)
+        end
+      end
+    RUBY
+  end
 end
