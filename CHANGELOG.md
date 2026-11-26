@@ -1,6 +1,7 @@
 ## [Unreleased]
 
 * `YARD/MeaninglessTag`: Allow `@param` on classes inheriting from `Struct.new`/`Data.define`
+* `YARD/StructParamTag`: Also check classes inheriting from `Struct.new`/`Data.define`
 
 ## [1.4.0] - 2026-11-14
 

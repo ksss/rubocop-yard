@@ -40,6 +40,59 @@ RSpec.describe RuboCop::Cop::YARD::StructParamTag, :config do
     RUBY
   end
 
+  it 'registers offenses for @!attribute on classes inheriting from Struct.new/Data.define and corrects them' do
+    expect_offense(<<~RUBY)
+      # @!attribute name [String]
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Use `@param` instead of `@!attribute` for Struct/Data members.
+      class Person < Data.define(:name)
+      end
+
+      # @!attribute x [Integer]
+      ^^^^^^^^^^^^^^^^^^^^^^^^^ Use `@param` instead of `@!attribute` for Struct/Data members.
+      # @!attribute y [Integer]
+      ^^^^^^^^^^^^^^^^^^^^^^^^^ Use `@param` instead of `@!attribute` for Struct/Data members.
+      class Point < ::Struct.new(
+        :x,
+        :y,
+        keyword_init: true
+      )
+        def sum
+          x + y
+        end
+      end
+    RUBY
+
+    expect_correction(<<~RUBY)
+      # @param name [String]
+      class Person < Data.define(:name)
+      end
+
+      # @param x [Integer]
+      # @param y [Integer]
+      class Point < ::Struct.new(
+        :x,
+        :y,
+        keyword_init: true
+      )
+        def sum
+          x + y
+        end
+      end
+    RUBY
+  end
+
+  it 'registers an offense but does not correct the directive form on a class inheriting from Struct.new' do
+    expect_offense(<<~RUBY)
+      # @!attribute [r] name
+      ^^^^^^^^^^^^^^^^^^^^^^ Use `@param` instead of `@!attribute` for Struct/Data members.
+      #   @return [String]
+      class Person < Struct.new(:name)
+      end
+    RUBY
+
+    expect_no_corrections
+  end
+
   it 'registers an offense but does not correct the directive form with a reader/writer flag' do
     expect_offense(<<~RUBY)
       # @!attribute [r] x
@@ -58,6 +111,10 @@ RSpec.describe RuboCop::Cop::YARD::StructParamTag, :config do
 
       # @!attribute x [Integer]
       CONST = 1
+
+      # @!attribute x [Integer]
+      class Child < Base
+      end
 
       # @!attribute x [Integer]
 
