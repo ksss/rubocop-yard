@@ -56,6 +56,35 @@ RSpec.describe RuboCop::Cop::YARD::MeaninglessTag, :config do
     RUBY
   end
 
+  it 'does not register an offense for @param on classes inheriting from Struct.new/Data.define' do
+    expect_no_offenses(<<~RUBY)
+      # @param name [String]
+      class Person < Data.define(:name)
+      end
+
+      # @param x [Integer]
+      # @param y [Integer]
+      class Point < ::Struct.new(
+        :x,
+        :y,
+        keyword_init: true
+      )
+        def sum
+          x + y
+        end
+      end
+    RUBY
+  end
+
+  it 'still registers an offense for @param on classes inheriting from anything else' do
+    expect_offense(<<~RUBY)
+      # @param name [String]
+      ^^^^^^^^^^^^^^^^^^^^^^ `@param` is meaningless tag on class
+      class Person < Base
+      end
+    RUBY
+  end
+
   it 'still registers an offense for @option on Struct/Data constant assignments' do
     expect_offense(<<~RUBY)
       # @option opts [String] :key

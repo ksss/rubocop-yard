@@ -7,6 +7,8 @@ module RuboCop
         include DocumentationComment
         extend AutoCorrector
 
+        def struct_or_data_new?: (RuboCop::AST::Node node) -> bool
+
         def struct_or_data_definition?: (RuboCop::AST::Node node) -> bool
 
         def on_class: (RuboCop::AST::Node node) -> void

@@ -20,23 +20,34 @@ module RuboCop
       #   # good
       #   CONST = 1
       #
-      #   # good (Struct/Data constant assignments accept @param)
+      #   # good (Struct/Data constant assignments and subclasses accept @param)
       #   # @param name [String]
       #   # @param age [Integer]
       #   Person = Struct.new(:name, :age, keyword_init: true)
+      #
+      #   # good
+      #   # @param name [String]
+      #   class Person < Data.define(:name)
+      #   end
       class MeaninglessTag < Base
         include YARD::Helper
         include RangeHelp
         include DocumentationComment
         extend AutoCorrector
 
+        # @!method struct_or_data_new?(node)
+        #   @param node [RuboCop::AST::Node]
+        def_node_matcher :struct_or_data_new?, <<~PATTERN
+          {
+            (block (send (const _ {:Struct :Data}) {:new :define} ...) ...)
+            (send (const _ {:Struct :Data}) {:new :define} ...)
+          }
+        PATTERN
+
         # @!method struct_or_data_definition?(node)
         #   @param node [RuboCop::AST::Node]
         def_node_matcher :struct_or_data_definition?, <<~PATTERN
-          (casgn _ _ {
-            (block (send (const _ {:Struct :Data}) {:new :define} ...) ...)
-            (send (const _ {:Struct :Data}) {:new :define} ...)
-          })
+          {(casgn _ _ #struct_or_data_new?) (class _ #struct_or_data_new? _)}
         PATTERN
 
         def on_class(node)

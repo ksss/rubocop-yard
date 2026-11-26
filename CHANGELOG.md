@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+* `YARD/MeaninglessTag`: Allow `@param` on classes inheriting from `Struct.new`/`Data.define`
+
 ## [1.4.0] - 2026-11-14
 
 * Add new cop `YARD/StructParamTag` (disabled by default) to prefer `@param` over `@!attribute` for `Struct.new`/`Data.define` members by @lekemula in https://github.com/ksss/rubocop-yard/pull/46
