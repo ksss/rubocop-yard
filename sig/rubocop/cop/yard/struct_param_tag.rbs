@@ -8,9 +8,12 @@ module RuboCop
         ATTRIBUTE: Regexp
         CORRECTABLE_ATTRIBUTE: Regexp
 
+        def struct_or_data_new?: (RuboCop::AST::Node node) -> bool
+
         def struct_or_data_definition?: (RuboCop::AST::Node node) -> bool
 
-        def on_casgn: (RuboCop::AST::CasgnNode node) -> void
+        def on_casgn: (RuboCop::AST::CasgnNode | RuboCop::AST::ClassNode node) -> void
+        alias on_class on_casgn
 
         private
 

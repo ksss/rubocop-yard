@@ -17,6 +17,16 @@ module RuboCop
       #   # good
       #   # @param name [String]
       #   Person = Struct.new(:name)
+      #
+      #   # bad
+      #   # @!attribute name [String]
+      #   class Person < Data.define(:name)
+      #   end
+      #
+      #   # good
+      #   # @param name [String]
+      #   class Person < Data.define(:name)
+      #   end
       class StructParamTag < Base
         extend AutoCorrector
 
@@ -25,13 +35,19 @@ module RuboCop
         # `@!attribute name [Type] text`, which maps onto `@param` one to one
         CORRECTABLE_ATTRIBUTE = /\A(#\s*)@!attribute(\s+\w+\s+\[)/
 
+        # @!method struct_or_data_new?(node)
+        #   @param node [RuboCop::AST::Node]
+        def_node_matcher :struct_or_data_new?, <<~PATTERN
+          {
+            (block (send (const _ {:Struct :Data}) {:new :define} ...) ...)
+            (send (const _ {:Struct :Data}) {:new :define} ...)
+          }
+        PATTERN
+
         # @!method struct_or_data_definition?(node)
         #   @param node [RuboCop::AST::Node]
         def_node_matcher :struct_or_data_definition?, <<~PATTERN
-          (casgn _ _ {
-            (block (send (const _ {:Struct :Data}) {:new :define} ...) ...)
-            (send (const _ {:Struct :Data}) {:new :define} ...)
-          })
+          {(casgn _ _ #struct_or_data_new?) (class _ #struct_or_data_new? _)}
         PATTERN
 
         def on_casgn(node)
@@ -47,6 +63,7 @@ module RuboCop
             end
           end
         end
+        alias on_class on_casgn
 
         private
 
